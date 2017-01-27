@@ -15,6 +15,7 @@ var Main = (function() {
 
 
     $ball.appendTo('body').delay(500).fadeIn(100, function () {
+      randomAttributes.song();
       $(this).fadeOut(500, function() {
         $(this).remove();
       });
@@ -41,6 +42,13 @@ var Main = (function() {
       }
 
       return 'rgb('+ rgb.join(',') +')';
+    },
+
+    song: function () {
+      var randomValue = Math.floor(Math.random() * 12) + 1;
+      var snd = new Audio("sounds/piano/"+ randomValue +".wav"); // buffers automatically when created
+
+      return snd.play();
     }
   }
 
