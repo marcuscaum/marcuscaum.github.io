@@ -16,6 +16,7 @@ var Main = (function() {
 
     $ball.appendTo('body').delay(500).fadeIn(100, function () {
       randomAttributes.song();
+      randomAttributes.storytellerMessages();
       $(this).fadeOut(500, function() {
         $(this).remove();
       });
@@ -49,7 +50,29 @@ var Main = (function() {
       var snd = new Audio("sounds/piano/"+ randomValue +".wav"); // buffers automatically when created
 
       return snd.play();
-    }
+    },
+
+    storytellerMessages: (function () {
+
+      var timeWindow = 500;
+      var timeout;
+
+      var storytellerMessages = function (context, args) {
+        var MESSAGES = ["You should keep pressing...", "Who knows what can happen if you keep pressing?", "She pressed me once, once..", "Sometimes i can feel her inside my head, am i dreaming?"];
+
+        var randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+        $('#storyteller').html(randomMessage);
+      };
+
+      return function() {
+        var context = this;
+        var args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function(){
+          storytellerMessages.apply(context, args);
+        }, timeWindow);
+      };
+    }())
   }
 
   return {

@@ -39,3 +39,9 @@ textarea:focus, input:focus{
   border-radius: 100%;
   position: absolute;
 }
+
+#storyteller {
+  font-family: serif;
+  position: absolute;
+  bottom: 0;
+}
