@@ -1,0 +1,23 @@
+{
+  "name": "marcuscaum.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcuscaum/marcuscaum.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcuscaum/marcuscaum.github.io/issues"
+  },
+  "homepage": "https://github.com/marcuscaum/marcuscaum.github.io#readme",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-preset-env": "^1.1.8"
+  }
+}
