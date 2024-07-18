@@ -1,23 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Eco...</title>
-	<link rel="stylesheet" href="css/main.css">
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	  ga('create', 'UA-90962930-1', 'auto');
-	  ga('send', 'pageview');
-	</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus Caum - Senior Software Engineer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .fade-in {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-30px);
+            }
+
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
 </head>
-<body>
-	<div class="ball"></div>
-	<h1 id="storyteller">Press...</h1>
-	<script async type="text/javascript" src="src/main.js" ></script>
+
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-6 fade-in">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold mb-4">Marcus Caum</h1>
+            <p class="text-xl font-semibold">Senior Software Engineer | React | TypeScript | E2E/Tests</p>
+            <div class="mt-4">
+                <p>Francisco Beltrão, PR, Brazil</p>
+                <p>+55 46 99935 1423 | <a href="mailto:marcuslucas.jb@gmail.com" class="text-blue-500">marcuslucas.jb@gmail.com</a></p>
+                <p><a href="https://linkedin.com/in/marcuscaum" class="text-blue-500">LinkedIn</a></p>
+            </div>
+        </header>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Summary</h2>
+            <p>Results-driven Senior Software Engineer with over 10 years of experience in developing innovative solutions for companies in the tech industry. Proficient in React, TypeScript, and Recoil, adept at handling end-to-end testing, and experienced in working with diverse tech stacks. Skilled in creating complex systems like route mapping, data visualization, and API integrations. Passionate about contributing to impactful projects that challenge and inspire growth.</p>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Experience</h2>
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Senior Software Engineer</h3>
+                <p>TruckMap | Remote - Chicago, IL | 11/2021 - Present</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Developed a route system using Mapbox API and Turf.js</li>
+                    <li>Built a dashboard for shipment management (CRUD)</li>
+                    <li>Implemented a clustering system for location points</li>
+                    <li>Integrated a system to load locations based on the user viewport</li>
+                    <li>Developed functionality to show and hide roads with restrictions based on user truck settings</li>
+                    <li>Assisted in hiring new senior developers, validating their curriculums and home assignments</li>
+                    <li>Configured CI and set up E2E tests</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Front-End Developer</h3>
+                <p>Irwin | Remote - Toronto, Canada | 03/2020 - 11/2021</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Built high-performance tables to hold more than 10k rows using virtualization</li>
+                    <li>Re-structured data fetching to use React Query and work with optimistic updates</li>
+                    <li>Developed a React Native app using Expo from scratch</li>
+                    <li>Created a filtering system using configuration files for easy updates</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Senior Front-End Software Engineer</h3>
+                <p>Fleek | Remote - New York, NY | 06/2019 - 02/2020</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Developed APIs and new components using React and GraphQL</li>
+                    <li>Integrated web3 using Metamask API</li>
+                    <li>Implemented a polling system for deployment status</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Front-End Developer</h3>
+                <p>Datumize | Remote - Barcelona, Spain | 11/2018 - 06/2019</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Developed React components and new application areas</li>
+                    <li>Implemented a pipeline system with drag-and-drop functionality</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Front-End Developer</h3>
+                <p>Picter | Remote - Munich, Germany | 06/2017 - 11/2018</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Maintained and developed solutions using React for photo contests</li>
+                    <li>Developed a contest system for photographers</li>
+                    <li>Created a management system for contest voting</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Front-End Developer</h3>
+                <p>Resultados Digitais | Florianópolis, Brazil | 05/2015 - 03/2017</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Developed and maintained lead-generation themes</li>
+                    <li>Led a small team to develop a popup creator feature</li>
+                    <li>Refactored landing page system using Ember</li>
+                    <li>Worked as a consultant helping other teams with front-end problems</li>
+                    <li>Assisted in hiring new engineers</li>
+                </ul>
+            </div>
+
+            <div class="mb-6">
+                <h3 class="text-xl font-semibold">Front-End Developer, Lead Designer</h3>
+                <p>Studio Imaxis | Francisco Beltrão, Brazil | 11/2011 - 03/2015</p>
+                <ul class="list-disc list-inside mt-2">
+                    <li>Developed multiple websites and mobile apps from scratch</li>
+                    <li>Defined front-end technologies for applications</li>
+                    <li>Created tools and libraries to improve development efficiency</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Languages</h2>
+            <ul class="list-disc list-inside">
+                <li>English: Proficient</li>
+                <li>Portuguese: Native</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Certifications</h2>
+            <ul class="list-disc list-inside">
+                <li>MongoDB for Developers, MongoDB, Inc.</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Training / Courses</h2>
+            <ul class="list-disc list-inside">
+                <li>HTML5 and jQuery, Programador do Futuro</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Awards</h2>
+            <ul class="list-disc list-inside">
+                <li>Talk at Google I/O Extended Sudoeste, Google Next Level Apps</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Skills</h2>
+            <ul class="list-disc list-inside">
+                <li>React, TypeScript, Recoil, E2E/Tests, React Native, HTML/CSS, Next, Node, MapBox/Geolocation</li>
+            </ul>
+        </section>
+
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold mb-4 slide-in">Strengths</h2>
+            <ul class="list-disc list-inside">
+                <li>Innovative Solution Developer: Proven track record in developing innovative solutions for tech companies, skilled in React & TypeScript</li>
+                <li>Leadership in Tech Projects: Experienced in leading tech teams, hiring developers, enhancing CI configurations, and handling geolocation APIs</li>
+                <li>User-Centric System Architect: Skilled in creating systems like route mapping, data visualization, and location-based services for enhanced user experience</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2 class="text-2xl font-bold mb-4 slide-in">Additional Highlights</h2>
+            <ul class="list-disc list-inside">
+                <li>Over 10 years of experience in software development</li>
+                <li>Extensive experience in remote and in-person roles</li>
+                <li>Proven ability to deliver high-quality software solutions on time</li>
+                <li>Excellent communication and collaboration skills</li>
+                <li>Strong problem-solving abilities and attention to detail</li>
+            </ul>
+        </section>
+    </div>
+
 </body>
+
 </html>
