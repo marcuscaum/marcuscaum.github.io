@@ -1,493 +1,1391 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="https://schema.org/Person">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MARCUS_CAUM.EXE - Terminal Portfolio</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>Marcus Caum - Senior Software Engineer | Next.js, React, TypeScript, DevOps</title>
-    <meta name="title" content="Marcus Caum - Senior Software Engineer | Next.js, React, TypeScript, DevOps">
-    <meta name="description" content="Senior Software Engineer with 10+ years experience in Next.js 15, React, TypeScript, DevOps. Expert in Docker, PostgreSQL, Supabase, Tailwind CSS. Available for remote opportunities.">
-    <meta name="keywords" content="Marcus Caum, Senior Software Engineer, Next.js 15, React, TypeScript, DevOps, Docker, PostgreSQL, Supabase, Tailwind CSS, Jotai, Remote Developer">
-    <meta name="author" content="Marcus Caum">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://marcuscaum.github.io/">
-    <meta property="og:title" content="Marcus Caum - Senior Software Engineer | Next.js, React, TypeScript, DevOps">
-    <meta property="og:description" content="Senior Software Engineer with 10+ years experience in Next.js 15, React, TypeScript, DevOps. Expert in Docker, PostgreSQL, Supabase, Tailwind CSS.">
-    <meta property="og:image" content="https://marcuscaum.github.io/www/img/img_logo.png">
-    <meta property="profile:first_name" content="Marcus">
-    <meta property="profile:last_name" content="Caum">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://marcuscaum.github.io/">
-    <meta property="twitter:title" content="Marcus Caum - Senior Software Engineer | Next.js, React, TypeScript, DevOps">
-    <meta property="twitter:description" content="Senior Software Engineer with 10+ years experience in Next.js 15, React, TypeScript, DevOps. Expert in Docker, PostgreSQL, Supabase, Tailwind CSS.">
-    <meta property="twitter:image" content="https://marcuscaum.github.io/www/img/img_logo.png">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org/",
-      "@type": "Person",
-      "name": "Marcus Caum",
-      "jobTitle": "Senior Software Engineer",
-      "url": "https://marcuscaum.github.io",
-      "sameAs": "https://linkedin.com/in/marcuscaum",
-      "email": "marcuslucas.jb@gmail.com",
-      "telephone": "+55 46 99935 1423",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Francisco Beltrão",
-        "addressRegion": "PR",
-        "addressCountry": "Brazil"
-      },
-      "knowsAbout": ["Next.js", "React", "TypeScript", "DevOps", "Docker", "PostgreSQL", "Supabase", "Tailwind CSS", "Jotai", "JavaScript"],
-      "alumniOf": "MongoDB University",
-      "workLocation": "Remote"
-    }
+    <meta
+      name="description"
+      content="Marcus Caum - Senior Software Engineer Terminal Interface. Next.js, React, TypeScript, DevOps Expert."
+    />
+    <meta
+      name="keywords"
+      content="Marcus Caum, Senior Software Engineer, Terminal, Cyberpunk, Next.js, React, TypeScript, DevOps"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "terminal-green": "#00ff41",
+              "terminal-bg": "#000",
+              "terminal-dark-green": "#00cc33",
+              "terminal-yellow": "#ffff00",
+            },
+            fontFamily: {
+              mono: ["Share Tech Mono", "monospace"],
+            },
+          },
+        },
+      };
     </script>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="www/img/img_logo.png">
-    <link rel="apple-touch-icon" href="www/img/img_logo.png">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    
-    <!-- Stylesheets -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+      /* Custom styles with Tailwind utilities */
 
-        body {
-            font-family: 'Inter', sans-serif;
+      /* Additional circuit lines */
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            45deg,
+            transparent 49%,
+            rgba(0, 255, 65, 0.1) 50%,
+            transparent 51%
+          ),
+          linear-gradient(
+            -45deg,
+            transparent 49%,
+            rgba(0, 255, 65, 0.08) 50%,
+            transparent 51%
+          );
+        background-size: 60px 60px, 80px 80px;
+        animation: circuitPulse 8s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes circuitPulse {
+        0% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0.4;
+          transform: scale(1.02);
+        }
+      }
+
+      /* Custom animations and effects that Tailwind can't handle */
+
+      /* Matrix/Circuit Background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 255, 65, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 255, 65, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 40%,
+            rgba(0, 255, 65, 0.08) 0%,
+            transparent 50%
+          ),
+          linear-gradient(90deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%),
+          linear-gradient(0deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 98px,
+            rgba(0, 255, 65, 0.03) 100px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 98px,
+            rgba(0, 255, 65, 0.03) 100px
+          );
+        background-size: 200px 200px, 300px 300px, 150px 150px, 100% 2px,
+          2px 100%, 100px 100px, 100px 100px;
+        animation: circuitFlow 20s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes circuitFlow {
+        0% {
+          background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+        100% {
+          background-position: 100% 100%, -100% -100%, 50% 50%, 100% 0%, 0% 100%,
+            100px 100px, -100px -100px;
+        }
+      }
+
+      .crt-effect {
+        position: relative;
+      }
+
+      /* CRT scanlines covering the entire page */
+      .crt-effect::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          transparent 50%,
+          rgba(0, 255, 65, 0.03) 50%
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      /* CRT horizontal scan effect */
+      .crt-effect::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 255, 65, 0.05),
+          transparent
+        );
+        animation: scan 3s linear infinite;
+        pointer-events: none;
+        z-index: 998;
+      }
+
+      @keyframes scan {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Terminal container styles are now handled by Tailwind classes */
+
+      /* Floating data particles */
+      .terminal::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            2px 2px at 20px 30px,
+            rgba(0, 255, 65, 0.3),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 40px 70px,
+            rgba(0, 255, 65, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 90px 40px,
+            rgba(0, 255, 65, 0.4),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 130px 80px,
+            rgba(0, 255, 65, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 160px 30px,
+            rgba(0, 255, 65, 0.3),
+            transparent
+          );
+        background-repeat: repeat;
+        background-size: 200px 100px;
+        animation: dataFlow 15s linear infinite;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      @keyframes dataFlow {
+        0% {
+          transform: translateX(0) translateY(0);
+        }
+        100% {
+          transform: translateX(-200px) translateY(-100px);
+        }
+      }
+
+      /* Keep essential animations */
+      .cursor {
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .typewriter {
+        overflow: hidden;
+        white-space: nowrap;
+        margin: 0;
+      }
+
+      /* Utility classes for elements not yet converted */
+      .info-line {
+        margin: 0.25rem 0;
+        padding-left: 0.75rem;
+        color: #00ff41;
+      }
+
+      .highlight {
+        color: #ffff00;
+        background: rgba(255, 255, 0, 0.1);
+        padding: 0 0.25rem;
+      }
+
+      .section {
+        margin: 1.25rem 0;
+        border-left: 2px solid #00ff41;
+        padding-left: 1rem;
+      }
+
+      .section-title {
+        color: #00ff41;
+        font-size: 1.125rem;
+        margin-bottom: 0.75rem;
+        text-decoration: underline;
+      }
+
+      .skill-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .skill-category {
+        border: 1px solid #00cc33;
+        padding: 10px;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .skill-category h4 {
+        color: #00ffff;
+        margin-bottom: 5px;
+      }
+
+      .command-input {
+        background: transparent;
+        border: none;
+        color: #00ff41;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        width: 200px;
+        caret-color: #00ff41;
+        position: relative;
+        z-index: 1001;
+      }
+
+      /* Make sure command section is always visible and accessible */
+      #command-section {
+        position: sticky;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(5px);
+        border-top: 1px solid #00ff41;
+        padding: 10px;
+        margin-top: 20px;
+        z-index: 1000;
+      }
+
+      /* Smooth scrolling for the entire page */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Custom scrollbar styling */
+      .terminal::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .terminal::-webkit-scrollbar-track {
+        background: #000;
+        border: 1px solid #00ff41;
+      }
+
+      .terminal::-webkit-scrollbar-thumb {
+        background: #00ff41;
+        border-radius: 4px;
+      }
+
+      .terminal::-webkit-scrollbar-thumb:hover {
+        background: #00cc33;
+      }
+
+      #typed-text {
+        color: #00ff41;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      .menu-option {
+        cursor: pointer;
+        padding: 5px 10px;
+        margin: 2px 0;
+        transition: all 0.3s;
+      }
+
+      .menu-option:hover {
+        background: rgba(0, 255, 65, 0.2);
+        transform: translateX(10px);
+      }
+
+      .ascii-art {
+        font-size: 0.7em;
+        line-height: 1;
+        color: #00cc33;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .status-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 20, 0, 0.95);
+        border-top: 1px solid #00ff41;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        height: 40px;
+        box-sizing: border-box;
+        z-index: 1000;
+      }
+
+      .glitch {
+        animation: glitch 2s infinite;
+      }
+
+      @keyframes glitch {
+        0%,
+        90%,
+        100% {
+          transform: translate(0);
+        }
+        92% {
+          transform: translate(-2px, 2px);
+        }
+        94% {
+          transform: translate(2px, -2px);
+        }
+        96% {
+          transform: translate(-2px, -2px);
+        }
+      }
+
+      .loading-bar {
+        width: 100%;
+        height: 20px;
+        border: 1px solid #00ff41;
+        margin: 10px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .loading-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00ff41, #00cc33);
+        animation: load 3s ease-in-out;
+      }
+
+      @keyframes load {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .terminal {
+          margin: 0;
+          padding: 15px;
+          font-size: 0.9em;
+          height: calc(100vh - 50px);
+          border-radius: 0;
         }
 
-        .fade-in {
-            animation: fadeIn 2s ease-in-out;
+        .skill-grid {
+          grid-template-columns: 1fr;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .status-bar {
+          font-size: 0.8em;
+          padding: 8px 15px;
+          height: 35px;
         }
-
-        .slide-in {
-            animation: slideIn 1s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .bounce {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-30px);
-            }
-
-            60% {
-                transform: translateY(-15px);
-            }
-        }
+      }
     </style>
-</head>
+  </head>
+  <body
+    class="crt-effect h-screen w-screen overflow-hidden m-0 p-0 bg-terminal-bg text-terminal-green font-mono relative"
+  >
+    <div
+      class="terminal bg-black/85 border-2 border-terminal-green h-[calc(100vh-60px)] w-screen p-5 overflow-y-auto relative backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,65,0.3),inset_0_0_20px_rgba(0,255,65,0.1)]"
+    >
+      <div class="text-center border-b border-terminal-green pb-3 mb-5">
+        <div class="text-xl mb-1">CAUM INDUSTRIES UNIFIED OPERATING SYSTEM</div>
+        <div class="text-sm text-terminal-dark-green">
+          Copyright 2025-∞ CAUM INDUSTRIES
+        </div>
+        <div class="text-sm text-terminal-dark-green">
+          Server 01 - Portfolio Module
+        </div>
+      </div>
 
-<body class="bg-gray-100 text-gray-800" itemscope itemtype="https://schema.org/Person">
-    
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded">Skip to main content</a>
+      <div
+        class="text-xs leading-none text-terminal-dark-green text-center my-5"
+      >
+        <pre>
+   ╔══════════════════════════════════════╗
+   ║     MARCUS CAUM TERMINAL v2.5.1     ║
+   ║     Senior Software Engineer         ║
+   ╚══════════════════════════════════════╝
+            </pre
+        >
+      </div>
 
-    <div class="container mx-auto p-6 fade-in">
-        <header class="text-center mb-10" role="banner">
-            <h1 class="text-4xl font-bold mb-4" itemprop="name">Marcus Caum</h1>
-            <p class="text-xl font-semibold" itemprop="jobTitle">Senior Software Engineer | Next.js | React | TypeScript | DevOps</p>
-            <div class="mt-4" itemscope itemtype="https://schema.org/PostalAddress">
-                <p itemprop="addressLocality">Francisco Beltrão, <span itemprop="addressRegion">PR</span>, <span itemprop="addressCountry">Brazil</span></p>
-                <p>
-                    <a href="tel:+5546999351423" class="text-blue-500 hover:text-blue-600" itemprop="telephone" aria-label="Phone number">+55 46 99935 1423</a> | 
-                    <a href="mailto:marcuslucas.jb@gmail.com" class="text-blue-500 hover:text-blue-600" itemprop="email" aria-label="Email address">marcuslucas.jb@gmail.com</a>
-                </p>
-                <p>
-                    <a href="https://linkedin.com/in/marcuscaum" class="text-blue-500 hover:text-blue-600" itemprop="sameAs" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a> | 
-                    <a href="https://github.com/marcuscaum" class="text-blue-500 hover:text-blue-600" itemprop="sameAs" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GitHub</a>
-                </p>
-            </div>
-        </header>
+      <div class="my-5 border-l-2 border-terminal-green pl-4">
+        <div class="text-terminal-green text-lg mb-3 underline">
+          SYSTEM BOOT SEQUENCE
+        </div>
+        <div
+          class="w-full h-5 border border-terminal-green my-3 relative overflow-hidden"
+        >
+          <div
+            class="loading-fill h-full bg-gradient-to-r from-terminal-green to-terminal-dark-green animate-pulse"
+          ></div>
+        </div>
+        <div id="boot-sequence"></div>
+      </div>
 
-        <main id="main-content" role="main">
+      <div
+        class="my-5 border-l-2 border-terminal-green pl-4 hidden"
+        id="main-menu"
+      >
+        <div class="text-terminal-green text-lg mb-3 underline">
+          MAIN MENU - SELECT OPTION
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('profile')"
+        >
+          ► [1] PERSONNEL FILE
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('skills')"
+        >
+          ► [2] TECHNICAL SPECIFICATIONS
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('experience')"
+        >
+          ► [3] MISSION HISTORY
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('projects')"
+        >
+          ► [4] PROJECT DATABASE
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('contact')"
+        >
+          ► [5] COMMUNICATION PROTOCOLS
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="downloadResume()"
+        >
+          ► [6] DOWNLOAD PERSONNEL DOSSIER
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showMatrix()"
+        >
+          ► [7] ENTER THE MATRIX
+        </div>
+      </div>
 
-            <section class="mb-10" aria-labelledby="summary-heading">
-                <h2 id="summary-heading" class="text-2xl font-bold mb-4 slide-in">Professional Summary</h2>
-                <p itemprop="description">Results-driven Senior Software Engineer with over 10 years of experience in developing innovative full-stack solutions for companies in the tech industry. Expert in <strong>Next.js 15</strong>, React, TypeScript, and modern development practices. Experienced in <strong>DevOps</strong> with Docker containerization and Portainer for container management. Proficient in database technologies including <strong>PostgreSQL</strong> and <strong>Supabase</strong>, with expertise in <strong>Tailwind CSS</strong> for responsive design. Skilled in creating complex systems like route mapping, data visualization, API integrations, and end-to-end testing. Passionate about contributing to impactful projects that challenge and inspire growth while mentoring development teams.</p>
-            </section>
+      <div class="section" id="profile-section" style="display: none">
+        <div class="section-title">PERSONNEL FILE - MARCUS_CAUM.DAT</div>
+        <div class="info-line">
+          ► Name: <span class="highlight">Marcus Caum</span>
+        </div>
+        <div class="info-line">
+          ► Designation: <span class="highlight">Senior Software Engineer</span>
+        </div>
+        <div class="info-line">
+          ► Location:
+          <span class="highlight">Francisco Beltrão, PR, Brazil</span>
+        </div>
+        <div class="info-line">
+          ► Experience: <span class="highlight">10+ Years</span>
+        </div>
+        <div class="info-line">
+          ► Status:
+          <span class="highlight">ACTIVE - Available for Remote Missions</span>
+        </div>
+        <br />
+        <div class="info-line">PROFILE SUMMARY:</div>
+        <div class="info-line">
+          Results-driven Senior Software Engineer with extensive
+        </div>
+        <div class="info-line">
+          experience in <span class="highlight">Next.js 15</span>, React,
+          TypeScript, and DevOps.
+        </div>
+        <div class="info-line">
+          Specialized in <span class="highlight">Docker containerization</span>,
+          PostgreSQL,
+        </div>
+        <div class="info-line">
+          Supabase, and modern web technologies. Expert in
+        </div>
+        <div class="info-line">system architecture and team leadership.</div>
+        <br />
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Experience</h2>
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Senior Software Engineer</h3>
-                <p>TruckMap | Remote - Chicago, IL | 11/2021 - Present</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Architected and developed scalable applications using <strong>Next.js 15</strong> with TypeScript</li>
-                    <li><strong>Migrated state management from Recoil to Jotai</strong>, improving bundle size and performance with atomic state management</li>
-                    <li>Developed a sophisticated route system using Mapbox API and Turf.js with real-time data processing</li>
-                    <li>Built responsive dashboards using <strong>Tailwind CSS</strong> for shipment management (CRUD operations)</li>
-                    <li>Designed and implemented <strong>PostgreSQL</strong> database schemas with <strong>Supabase</strong> integration</li>
-                    <li>Implemented advanced clustering system for location points with performance optimization</li>
-                    <li>Integrated viewport-based location loading system with efficient data caching</li>
-                    <li>Developed functionality to show and hide roads with restrictions based on user truck settings</li>
-                    <li>Led technical hiring process, validating senior developers' skills and reviewing home assignments</li>
-                    <li>Configured comprehensive CI/CD pipelines and established E2E testing infrastructure</li>
-                </ul>
-            </div>
+      <div class="section" id="skills-section" style="display: none">
+        <div class="section-title">TECHNICAL SPECIFICATIONS</div>
+        <div class="skill-grid">
+          <div class="skill-category">
+            <h4>FRONTEND_SYSTEMS.EXE</h4>
+            <div class="info-line">• Next.js 15</div>
+            <div class="info-line">• React & TypeScript</div>
+            <div class="info-line">• Tailwind CSS</div>
+            <div class="info-line">• Jotai & Recoil</div>
+          </div>
+          <div class="skill-category">
+            <h4>BACKEND_CORE.SYS</h4>
+            <div class="info-line">• Node.js</div>
+            <div class="info-line">• PostgreSQL</div>
+            <div class="info-line">• Supabase</div>
+            <div class="info-line">• GraphQL & REST</div>
+          </div>
+          <div class="skill-category">
+            <h4>DEVOPS_MODULE.BIN</h4>
+            <div class="info-line">• Docker</div>
+            <div class="info-line">• Portainer</div>
+            <div class="info-line">• CI/CD Pipelines</div>
+            <div class="info-line">• E2E Testing</div>
+          </div>
+          <div class="skill-category">
+            <h4>SPECIALIZED_TECH.DAT</h4>
+            <div class="info-line">• MapBox API</div>
+            <div class="info-line">• Data Visualization</div>
+            <div class="info-line">• Performance Optimization</div>
+            <div class="info-line">• Team Leadership</div>
+          </div>
+        </div>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Front-End Developer</h3>
-                <p>Irwin | Remote - Toronto, Canada | 03/2020 - 11/2021</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Built high-performance tables to hold more than 10k rows using virtualization</li>
-                    <li>Re-structured data fetching to use React Query and work with optimistic updates</li>
-                    <li>Developed a React Native app using Expo from scratch</li>
-                    <li>Created a filtering system using configuration files for easy updates</li>
-                </ul>
-            </div>
+      <div class="section" id="experience-section" style="display: none">
+        <div class="section-title">MISSION HISTORY - CLASSIFIED</div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Senior Front-End Software Engineer</h3>
-                <p>Fleek | Remote - New York, NY | 06/2019 - 02/2020</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Developed APIs and new components using React and GraphQL</li>
-                    <li>Integrated web3 using Metamask API</li>
-                    <li>Implemented a polling system for deployment status</li>
-                </ul>
-            </div>
+        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">CURRENT MISSION:</span> TruckMap Industries
+          </div>
+          <div class="info-line">Duration: 11/2021 - Present (Active)</div>
+          <div class="info-line">Location: Remote - Chicago, IL</div>
+          <div class="info-line">Objectives Completed:</div>
+          <div class="info-line">
+            • Architected scalable applications using
+            <span class="highlight">Next.js 15</span> with TypeScript
+          </div>
+          <div class="info-line">
+            • <span class="highlight">Migrated Recoil → Jotai</span> improving
+            bundle size and performance
+          </div>
+          <div class="info-line">
+            • Developed sophisticated route system using
+            <span class="highlight">Mapbox API</span> and Turf.js
+          </div>
+          <div class="info-line">
+            • Built responsive dashboards with
+            <span class="highlight">Tailwind CSS</span> for shipment management
+          </div>
+          <div class="info-line">
+            • Implemented advanced clustering system for location points
+            optimization
+          </div>
+          <div class="info-line">
+            • Integrated viewport-based location loading with efficient data
+            caching
+          </div>
+          <div class="info-line">
+            • Developed roads restriction visibility based on truck settings
+          </div>
+          <div class="info-line">
+            • Led technical hiring process, validating senior developers' skills
+          </div>
+          <div class="info-line">
+            • Configured comprehensive
+            <span class="highlight">CI/CD pipelines</span> and E2E testing
+            infrastructure
+          </div>
+        </div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Front-End Developer</h3>
-                <p>Datumize | Remote - Barcelona, Spain | 11/2018 - 06/2019</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Developed React components and new application areas</li>
-                    <li>Implemented a pipeline system with drag-and-drop functionality</li>
-                </ul>
-            </div>
+        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PREVIOUS MISSION:</span> Irwin Corporation
+          </div>
+          <div class="info-line">Duration: 03/2020 - 11/2021</div>
+          <div class="info-line">Location: Remote - Toronto, Canada</div>
+          <div class="info-line">Objectives Completed:</div>
+          <div class="info-line">
+            • Built high-performance tables (10K+ rows)
+          </div>
+          <div class="info-line">• React Query optimization implementation</div>
+          <div class="info-line">• React Native app development</div>
+        </div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Front-End Developer</h3>
-                <p>Picter | Remote - Munich, Germany | 06/2017 - 11/2018</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Maintained and developed solutions using React for photo contests</li>
-                    <li>Developed a contest system for photographers</li>
-                    <li>Created a management system for contest voting</li>
-                </ul>
-            </div>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Front-End Developer</h3>
-                <p>Resultados Digitais | Florianópolis, Brazil | 05/2015 - 03/2017</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Developed and maintained lead-generation themes</li>
-                    <li>Led a small team to develop a popup creator feature</li>
-                    <li>Refactored landing page system using Ember</li>
-                    <li>Worked as a consultant helping other teams with front-end problems</li>
-                    <li>Assisted in hiring new engineers</li>
-                </ul>
-            </div>
+      <div class="section" id="projects-section" style="display: none">
+        <div class="section-title">PROJECT DATABASE</div>
 
-            <div class="mb-6">
-                <h3 class="text-xl font-semibold">Front-End Developer, Lead Designer</h3>
-                <p>Studio Imaxis | Francisco Beltrão, Brazil | 11/2011 - 03/2015</p>
-                <ul class="list-disc list-inside mt-2">
-                    <li>Developed multiple websites and mobile apps from scratch</li>
-                    <li>Defined front-end technologies for applications</li>
-                    <li>Created tools and libraries to improve development efficiency</li>
-                </ul>
-            </div>
-        </section>
+        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PROJECT_ALPHA:</span> TruckMap Route System
+          </div>
+          <div class="info-line">Status: OPERATIONAL</div>
+          <div class="info-line">
+            Tech Stack: Next.js 15, MapBox, Jotai, PostgreSQL
+          </div>
+          <div class="info-line">
+            Features: Real-time routing, clustering, restrictions
+          </div>
+        </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Languages</h2>
-            <ul class="list-disc list-inside">
-                <li>English: Proficient</li>
-                <li>Portuguese: Native</li>
-            </ul>
-        </section>
+        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PROJECT_BETA:</span> High-Performance Data
+            Tables
+          </div>
+          <div class="info-line">Status: COMPLETED</div>
+          <div class="info-line">
+            Tech Stack: React, TypeScript, Virtualization
+          </div>
+          <div class="info-line">
+            Features: 10K+ rows, React Query, Filtering
+          </div>
+        </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Certifications</h2>
-            <ul class="list-disc list-inside">
-                <li>MongoDB for Developers, MongoDB, Inc.</li>
-            </ul>
-        </section>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Training / Courses</h2>
-            <ul class="list-disc list-inside">
-                <li>HTML5 and jQuery, Programador do Futuro</li>
-            </ul>
-        </section>
+      <div class="section" id="contact-section" style="display: none">
+        <div class="section-title">COMMUNICATION PROTOCOLS</div>
+        <div class="info-line">
+          ► Email: <span class="highlight">marcuslucas.jb@gmail.com</span>
+        </div>
+        <div class="info-line">
+          ► LinkedIn: <span class="highlight">linkedin.com/in/marcuscaum</span>
+        </div>
+        <div class="info-line">
+          ► GitHub: <span class="highlight">github.com/marcuscaum</span>
+        </div>
+        <div class="info-line">
+          ► Phone: <span class="highlight">+55 46 99935 1423</span>
+        </div>
+        <br />
+        <div class="info-line">SECURE CHANNELS AVAILABLE:</div>
+        <div
+          class="menu-option"
+          onclick="window.open('mailto:marcuslucas.jb@gmail.com')"
+        >
+          ► [1] SEND ENCRYPTED MESSAGE
+        </div>
+        <div
+          class="menu-option"
+          onclick="window.open('https://linkedin.com/in/marcuscaum', '_blank')"
+        >
+          ► [2] CONNECT VIA LINKEDIN
+        </div>
+        <div
+          class="menu-option"
+          onclick="window.open('https://github.com/marcuscaum', '_blank')"
+        >
+          ► [3] ACCESS CODE REPOSITORY
+        </div>
+        <br />
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Awards</h2>
-            <ul class="list-disc list-inside">
-                <li>Talk at Google I/O Extended Sudoeste, Google Next Level Apps</li>
-            </ul>
-        </section>
+      <div class="section" id="matrix-section" style="display: none">
+        <div class="section-title glitch">ENTERING THE MATRIX...</div>
+        <div class="ascii-art">
+          <pre id="matrix-rain"></pre>
+        </div>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] EXIT MATRIX
+        </div>
+      </div>
 
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Technical Skills</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <h3 class="text-lg font-semibold mb-3 text-blue-600">Frontend Development</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li><strong>Next.js 15</strong> - Full-stack React framework</li>
-                        <li><strong>React & TypeScript</strong> - Component development</li>
-                        <li><strong>Tailwind CSS</strong> - Utility-first CSS framework</li>
-                        <li><strong>Jotai & Recoil</strong> - State management solutions</li>
-                        <li>React Query, React Native</li>
-                        <li>HTML5/CSS3, JavaScript ES6+</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3 text-green-600">Backend & Database</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li><strong>Node.js</strong> - Server-side development</li>
-                        <li><strong>PostgreSQL</strong> - Relational database</li>
-                        <li><strong>Supabase</strong> - Backend-as-a-Service</li>
-                        <li>GraphQL, REST APIs</li>
-                        <li>MongoDB</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3 text-purple-600">DevOps & Infrastructure</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li><strong>Docker</strong> - Containerization</li>
-                        <li><strong>Portainer</strong> - Container management</li>
-                        <li>CI/CD Pipelines</li>
-                        <li>E2E Testing & Test Automation</li>
-                        <li>Cloud Deployment</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-3 text-orange-600">Specialized</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li><strong>MapBox/Geolocation</strong> - Location services</li>
-                        <li>Data Visualization</li>
-                        <li>Performance Optimization</li>
-                        <li>Web3 Integration</li>
-                        <li>Team Leadership & Mentoring</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 slide-in">Strengths</h2>
-            <ul class="list-disc list-inside">
-                <li>Innovative Solution Developer: Proven track record in developing innovative solutions for tech companies, skilled in React & TypeScript</li>
-                <li>Leadership in Tech Projects: Experienced in leading tech teams, hiring developers, enhancing CI configurations, and handling geolocation APIs</li>
-                <li>User-Centric System Architect: Skilled in creating systems like route mapping, data visualization, and location-based services for enhanced user experience</li>
-            </ul>
-        </section>
-
-            <section class="mb-10" aria-labelledby="projects-heading">
-                <h2 id="projects-heading" class="text-2xl font-bold mb-4 slide-in">Featured Projects</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
-                        <h3 class="text-xl font-semibold mb-3 text-blue-600">TruckMap Route Optimization</h3>
-                        <p class="text-gray-700 mb-3">Advanced geolocation system with real-time route mapping, clustering algorithms, and restriction-based navigation for commercial vehicles.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Next.js 15</span>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">MapBox API</span>
-                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Jotai</span>
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">PostgreSQL</span>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
-                        <h3 class="text-xl font-semibold mb-3 text-green-600">High-Performance Data Tables</h3>
-                        <p class="text-gray-700 mb-3">Virtualized table system handling 10K+ rows with React Query optimization, filtering systems, and real-time updates.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">React</span>
-                            <span class="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded">TypeScript</span>
-                            <span class="px-2 py-1 bg-pink-100 text-pink-800 text-xs rounded">React Query</span>
-                            <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded">Virtualization</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="mb-10" aria-labelledby="highlights-heading">
-                <h2 id="highlights-heading" class="text-2xl font-bold mb-4 slide-in">Key Achievements</h2>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-blue-600">10+</div>
-                        <div class="text-sm text-blue-800">Years Experience</div>
-                    </div>
-                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-green-600">5+</div>
-                        <div class="text-sm text-green-800">Countries Worked</div>
-                    </div>
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg text-center">
-                        <div class="text-2xl font-bold text-purple-600">100%</div>
-                        <div class="text-sm text-purple-800">Remote Success</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Call to Action -->
-            <section class="text-center py-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg text-white mb-10" aria-labelledby="cta-heading">
-                <h2 id="cta-heading" class="text-3xl font-bold mb-4">Ready to Build Something Amazing Together?</h2>
-                <p class="text-xl mb-6 opacity-90">Let's discuss how my expertise in Next.js, React, and DevOps can drive your next project forward.</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="mailto:marcuslucas.jb@gmail.com" 
-                       class="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-300"
-                       aria-label="Send email to Marcus Caum">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-                        </svg>
-                        Email Me
-                    </a>
-                    <button onclick="downloadResume()" 
-                            class="inline-flex items-center px-6 py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-300"
-                            aria-label="Download resume as PDF">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                        Download Resume
-                    </button>
-                    <a href="https://linkedin.com/in/marcuscaum" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="inline-flex items-center px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-blue-600 transition-colors duration-300"
-                       aria-label="Connect on LinkedIn">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
-                        </svg>
-                        Connect on LinkedIn
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <footer class="text-center py-8 border-t border-gray-300 text-gray-600" role="contentinfo">
-            <p>&copy; 2025 Marcus Caum. Built with Next.js mindset and passion for clean code.</p>
-            <p class="text-sm mt-2">Available for remote opportunities worldwide 🌍</p>
-        </footer>
+      <div
+        class="my-5 border-l-2 border-terminal-green pl-4"
+        id="command-section"
+      >
+        <div class="text-terminal-green text-lg mb-3 underline">
+          COMMAND LINE INTERFACE
+        </div>
+        <div id="command-output" class="mb-3"></div>
+        <div class="relative flex items-center">
+          <span class="text-terminal-green mr-2">marcus@portfolio:~$</span>
+          <input
+            type="text"
+            class="command-input bg-transparent border-0 text-terminal-green font-mono outline-0 flex-1 min-w-0"
+            id="command-input"
+            placeholder="type 'help' for commands"
+            onkeypress="handleCommand(event)"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span
+            class="cursor bg-terminal-green animate-pulse inline-block w-2 h-4 ml-1"
+            >&nbsp;</span
+          >
+        </div>
+      </div>
     </div>
 
-    <!-- Performance: Lazy load animations -->
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-black/95 border-t border-terminal-green py-2 px-5 flex justify-between text-sm h-10 z-[1000]"
+    >
+      <span>SYSTEM STATUS: ONLINE</span>
+      <span>USER: VISITOR</span>
+      <span id="current-time"></span>
+      <span>CONNECTION: SECURE</span>
+    </div>
+
     <script>
-        // Intersection Observer for lazy animation loading
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('slide-in');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all sections for animations
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('section h2').forEach(el => observer.observe(el));
+      let currentSection = "boot";
+      let bootIndex = 0;
+
+      // Audio System with Real Terminal Sounds
+      class TerminalAudio {
+        constructor() {
+          this.isEnabled = true;
+          this.sounds = {};
+          this.backgroundLoop = null;
+          this.initAudio();
+        }
+
+        async initAudio() {
+          try {
+            // Preload all audio files
+            const soundFiles = {
+              // Boot sounds
+              powerOn: "sounds/poweron.mp3",
+              powerOff: "sounds/poweroff.mp3",
+
+              // Typing sounds - single characters
+              type1: "sounds/ui_hacking_charsingle_01.wav",
+              type2: "sounds/ui_hacking_charsingle_02.wav",
+              type3: "sounds/ui_hacking_charsingle_03.wav",
+              type4: "sounds/ui_hacking_charsingle_04.wav",
+              type5: "sounds/ui_hacking_charsingle_05.wav",
+              type6: "sounds/ui_hacking_charsingle_06.wav",
+
+              // Menu navigation
+              enter1: "sounds/ui_hacking_charenter_01.wav",
+              enter2: "sounds/ui_hacking_charenter_02.wav",
+              enter3: "sounds/ui_hacking_charenter_03.wav",
+
+              // Background/scrolling
+              scroll: "sounds/ui_hacking_charscroll.wav",
+              scrollLoop: "sounds/ui_hacking_charscroll_lp.wav",
+
+              // Piano easter egg
+              piano1: "sounds/piano/1.wav",
+              piano2: "sounds/piano/2.wav",
+              piano3: "sounds/piano/3.wav",
+              piano4: "sounds/piano/4.wav",
+              piano5: "sounds/piano/5.wav",
+            };
+
+            // Load all sounds
+            for (const [key, path] of Object.entries(soundFiles)) {
+              this.sounds[key] = new Audio(path);
+              this.sounds[key].preload = "auto";
+              this.sounds[key].volume = 0.3; // Default volume
+            }
+
+            // Set specific volumes
+            this.sounds.powerOn.volume = 0.4;
+            this.sounds.powerOff.volume = 0.4;
+            this.sounds.scrollLoop.volume = 0.1;
+            this.sounds.scroll.volume = 0.2;
+
+            // Start background ambience
+            this.startBackgroundAmbience();
+          } catch (error) {
+            console.log("Audio loading failed:", error);
+          }
+        }
+
+        // Background ambience
+        startBackgroundAmbience() {
+          if (!this.isEnabled || !this.sounds.scrollLoop) return;
+
+          // Play subtle scrolling loop in background
+          const playAmbience = () => {
+            if (this.isEnabled && Math.random() < 0.4) {
+              // 40% chance
+              this.playSound("scroll");
+            }
+          };
+
+          this.backgroundLoop = setInterval(
+            playAmbience,
+            3000 + Math.random() * 4000
+          );
+        }
+
+        // Generic sound player with random variation
+        playSound(soundKey, volume = null) {
+          if (!this.isEnabled || !this.sounds[soundKey]) return;
+
+          try {
+            const sound = this.sounds[soundKey].cloneNode();
+            if (volume) sound.volume = volume;
+
+            // Add slight pitch variation for realism
+            if (sound.mozPreservesPitch !== undefined) {
+              sound.mozPreservesPitch = false;
+            } else if (sound.webkitPreservesPitch !== undefined) {
+              sound.webkitPreservesPitch = false;
+            }
+
+            sound.playbackRate = 0.9 + Math.random() * 0.2; // Vary pitch slightly
+            sound.play().catch((e) => console.log("Audio play failed:", e));
+          } catch (error) {
+            console.log("Sound playback error:", error);
+          }
+        }
+
+        // Typing sound with variation
+        playKeyPress() {
+          if (!this.isEnabled) return;
+
+          // Randomly select from typing sounds
+          const typeSounds = [
+            "type1",
+            "type2",
+            "type3",
+            "type4",
+            "type5",
+            "type6",
+          ];
+          const randomSound =
+            typeSounds[Math.floor(Math.random() * typeSounds.length)];
+          this.playSound(randomSound, 0.2 + Math.random() * 0.2);
+        }
+
+        // Menu selection sound
+        playMenuSelect() {
+          if (!this.isEnabled) return;
+
+          // Randomly select from enter sounds
+          const enterSounds = ["enter1", "enter2", "enter3"];
+          const randomSound =
+            enterSounds[Math.floor(Math.random() * enterSounds.length)];
+          this.playSound(randomSound, 0.3);
+        }
+
+        // Boot sound
+        playBootSound() {
+          if (!this.isEnabled) return;
+          this.playSound("powerOn", 0.4);
+        }
+
+        // Error sound - play power off sound
+        playError() {
+          if (!this.isEnabled) return;
+
+          // Use power off sound for errors, play 3 times quickly
+          for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+              this.playSound("powerOff", 0.3);
+            }, i * 200);
+          }
+        }
+
+        // Power off sound (for shutdown/exit)
+        playPowerOff() {
+          if (!this.isEnabled) return;
+          this.playSound("powerOff", 0.4);
+        }
+
+        // Matrix sound effect
+        playMatrixSound() {
+          if (!this.isEnabled) return;
+          this.playSound("scrollLoop", 0.15);
+        }
+
+        // Easter egg: piano melody
+        playPianoMelody() {
+          if (!this.isEnabled) return;
+
+          const melody = [
+            "piano1",
+            "piano2",
+            "piano3",
+            "piano2",
+            "piano4",
+            "piano5",
+          ];
+          melody.forEach((note, index) => {
+            setTimeout(() => {
+              this.playSound(note, 0.4);
+            }, index * 400);
+          });
+        }
+
+        toggle() {
+          this.isEnabled = !this.isEnabled;
+          if (!this.isEnabled && this.backgroundLoop) {
+            clearInterval(this.backgroundLoop);
+            this.backgroundLoop = null;
+          } else if (this.isEnabled) {
+            this.startBackgroundAmbience();
+          }
+
+          // Update status bar
+          const audioStatus = document.getElementById("audio-status");
+          if (audioStatus) {
+            audioStatus.textContent = `AUDIO: ${this.isEnabled ? "ON" : "OFF"}`;
+            audioStatus.style.color = this.isEnabled ? "#00ff41" : "#ff4444";
+          }
+        }
+      }
+
+      // Initialize audio system
+      const terminalAudio = new TerminalAudio();
+
+      const bootMessages = [
+        "INITIALIZING NEURAL NETWORK...",
+        "LOADING PERSONAL DATABASE...",
+        "SCANNING FOR AVAILABLE PROJECTS...",
+        "CONNECTING TO GITHUB REPOSITORY...",
+        "VERIFYING SECURITY CLEARANCE...",
+        "LOADING SKILL MODULES...",
+        "ESTABLISHING COMMUNICATION PROTOCOLS...",
+        "SYSTEM READY - WELCOME TO THE MARCUS CAUM INTERFACE",
+      ];
+
+      function typeWriter(element, text, speed = 50, callback) {
+        let i = 0;
+        element.innerHTML = "";
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            terminalAudio.playKeyPress();
+            i++;
+            setTimeout(type, speed);
+          } else if (callback) {
+            callback();
+          }
+        }
+        type();
+      }
+
+      function bootSequence() {
+        const bootElement = document.getElementById("boot-sequence");
+
+        if (bootIndex < bootMessages.length) {
+          const line = document.createElement("div");
+          line.className = "info-line";
+          bootElement.appendChild(line);
+
+          typeWriter(line, "► " + bootMessages[bootIndex], 30, () => {
+            bootIndex++;
+
+            // Auto-scroll during boot sequence
+            setTimeout(() => {
+              const terminal = document.querySelector(".terminal");
+              terminal.scrollTop = terminal.scrollHeight;
+            }, 100);
+
+            setTimeout(bootSequence, 500);
+          });
+        } else {
+          setTimeout(() => {
+            document.querySelector(".section").style.display = "none";
+            document.getElementById("main-menu").style.display = "block";
+            currentSection = "main";
+
+            // Scroll to show main menu
+            setTimeout(smoothScrollToBottom, 300);
+          }, 1000);
+        }
+      }
+
+      function showSection(section) {
+        // Hide all sections
+        const sections = [
+          "main-menu",
+          "profile-section",
+          "skills-section",
+          "experience-section",
+          "projects-section",
+          "contact-section",
+          "matrix-section",
+        ];
+        sections.forEach((s) => {
+          document.getElementById(s).style.display = "none";
         });
 
-        // Resume download functionality
-        async function downloadResume() {
-            try {
-                // Create a clean version for PDF generation
-                const printContent = document.cloneNode(true);
-                
-                // Remove CTA section and animations for clean PDF
-                const ctaSection = printContent.querySelector('[aria-labelledby="cta-heading"]');
-                if (ctaSection) ctaSection.remove();
-                
-                // Remove animation classes
-                printContent.querySelectorAll('.slide-in, .fade-in, .bounce').forEach(el => {
-                    el.classList.remove('slide-in', 'fade-in', 'bounce');
-                });
+        // Show selected section
+        document.getElementById(section + "-section").style.display = "block";
+        currentSection = section;
 
-                // Create a new window for printing
-                const printWindow = window.open('', '_blank');
-                printWindow.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Marcus Caum - Resume</title>
-                        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css" rel="stylesheet">
-                        <style>
-                            @media print {
-                                body { font-size: 12px; }
-                                .no-print { display: none !important; }
-                                .break-inside-avoid { break-inside: avoid; }
-                                h1 { font-size: 24px; }
-                                h2 { font-size: 18px; margin-top: 20px; }
-                                h3 { font-size: 16px; }
-                                .container { max-width: none; margin: 0; padding: 20px; }
-                                a { color: #000 !important; text-decoration: none !important; }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        ${printContent.querySelector('.container').innerHTML}
-                    </body>
-                    </html>
-                `);
-                
-                printWindow.document.close();
-                
-                // Wait for content to load, then print
-                printWindow.onload = () => {
-                    setTimeout(() => {
-                        printWindow.focus();
-                        printWindow.print();
-                        printWindow.close();
-                    }, 500);
-                };
-
-            } catch (error) {
-                console.error('Error generating resume:', error);
-                // Fallback: open print dialog for current page
-                window.print();
-            }
+        if (section === "matrix") {
+          startMatrix();
         }
+      }
+
+      function showMainMenu() {
+        const sections = [
+          "profile-section",
+          "skills-section",
+          "experience-section",
+          "projects-section",
+          "contact-section",
+          "matrix-section",
+        ];
+        sections.forEach((s) => {
+          document.getElementById(s).style.display = "none";
+        });
+        document.getElementById("main-menu").style.display = "block";
+        currentSection = "main";
+      }
+
+      function handleCommand(event) {
+        terminalAudio.playKeyPress();
+
+        if (event.key === "Enter") {
+          const input = document.getElementById("command-input");
+          const output = document.getElementById("command-output");
+          const command = input.value.toLowerCase().trim();
+
+          let response = "";
+
+          switch (command) {
+            case "help":
+              response = `
+► Available commands:
+  • help - Show this help menu
+  • about - Show profile information
+  • skills - Display technical skills
+  • experience - Show work history
+  • projects - List projects
+  • contact - Show contact information
+  • download - Download resume
+  • clear - Clear terminal
+  • matrix - Enter the matrix
+  • whoami - Current user info`;
+              break;
+            case "about":
+              showSectionWithScroll("profile");
+              response = "► Loading personnel file...";
+              break;
+            case "skills":
+              showSectionWithScroll("skills");
+              response = "► Accessing technical specifications...";
+              break;
+            case "experience":
+              showSectionWithScroll("experience");
+              response = "► Retrieving mission history...";
+              break;
+            case "projects":
+              showSectionWithScroll("projects");
+              response = "► Opening project database...";
+              break;
+            case "contact":
+              showSectionWithScroll("contact");
+              response = "► Establishing communication protocols...";
+              break;
+            case "download":
+              downloadResume();
+              response = "► Generating personnel dossier...";
+              break;
+            case "clear":
+              output.innerHTML = "";
+              input.value = "";
+              document.getElementById("typed-text").textContent = "";
+              return;
+            case "matrix":
+              showSection("matrix");
+              response = "► Entering the matrix...";
+              break;
+            case "whoami":
+              response =
+                "► Current user: VISITOR\n► Access level: PUBLIC\n► Location: WEB_INTERFACE";
+              break;
+            default:
+              response = `► Command '${command}' not recognized. Type 'help' for available commands.`;
+          }
+
+          const commandLine = document.createElement("div");
+          commandLine.innerHTML = `<span class="prompt">marcus@portfolio:~$</span> ${input.value}`;
+          output.appendChild(commandLine);
+
+          const responseLine = document.createElement("div");
+          responseLine.innerHTML = response;
+          responseLine.style.whiteSpace = "pre-line";
+          output.appendChild(responseLine);
+
+          input.value = "";
+
+          // Auto-scroll to show new content
+          output.scrollTop = output.scrollHeight;
+
+          // Also ensure the terminal scrolls to show the output
+          setTimeout(() => {
+            const terminal = document.querySelector(".terminal");
+            terminal.scrollTop = terminal.scrollHeight;
+          }, 100);
+        }
+      }
+
+      function downloadResume() {
+        // Simple print functionality for now
+        window.print();
+      }
+
+      function startMatrix() {
+        const matrixElement = document.getElementById("matrix-rain");
+        let matrix = "";
+        const characters =
+          "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+
+        for (let i = 0; i < 20; i++) {
+          let line = "";
+          for (let j = 0; j < 50; j++) {
+            line += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
+          }
+          matrix += line + "\n";
+        }
+
+        matrixElement.textContent = matrix;
+
+        // Animate the matrix
+        setInterval(() => {
+          if (currentSection === "matrix") {
+            matrix = "";
+            for (let i = 0; i < 20; i++) {
+              let line = "";
+              for (let j = 0; j < 50; j++) {
+                line += characters.charAt(
+                  Math.floor(Math.random() * characters.length)
+                );
+              }
+              matrix += line + "\n";
+            }
+            matrixElement.textContent = matrix;
+          }
+        }, 100);
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById("current-time").textContent = timeString;
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(bootSequence, 1000);
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Focus on command input
+        document.getElementById("command-input").focus();
+      });
+
+      // Keep focus on command input at all times
+      function maintainFocus() {
+        const commandInput = document.getElementById("command-input");
+        if (commandInput && document.activeElement !== commandInput) {
+          commandInput.focus();
+        }
+      }
+
+      // Multiple event listeners to ensure input stays focused
+      document.addEventListener("click", function (e) {
+        // Don't focus if clicking on links or buttons that need interaction
+        if (e.target.tagName !== "A" && !e.target.onclick && !e.target.href) {
+          terminalAudio.playMenuSelect();
+          setTimeout(maintainFocus, 10);
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        // Redirect all keyboard input to command input except for special keys
+        const commandInput = document.getElementById("command-input");
+        if (
+          document.activeElement !== commandInput &&
+          e.key !== "Tab" &&
+          !e.ctrlKey &&
+          !e.altKey &&
+          !e.metaKey
+        ) {
+          commandInput.focus();
+        }
+      });
+
+      // Focus when window regains focus
+      window.addEventListener("focus", maintainFocus);
+
+      // Prevent input from losing focus on blur (unless specifically needed)
+      document
+        .getElementById("command-input")
+        .addEventListener("blur", function () {
+          setTimeout(maintainFocus, 10);
+        });
+
+      // Scroll management system
+      let scrollTimeout;
+      let isScrolling = false;
+
+      function smoothScrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }
+
+      function smoothScrollToBottom() {
+        const terminal = document.querySelector(".terminal");
+        terminal.scrollTo({
+          top: terminal.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+
+      // Add scroll event listener with audio feedback
+      document
+        .querySelector(".terminal")
+        .addEventListener("scroll", function () {
+          if (!isScrolling) {
+            terminalAudio.playSound("scroll");
+            isScrolling = true;
+          }
+
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+          }, 150);
+        });
+
+      // Auto-scroll to command section when sections change
+      function showSectionWithScroll(sectionName) {
+        showSection(sectionName);
+        setTimeout(() => {
+          const commandSection = document.getElementById("command-section");
+          commandSection.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+        }, 300);
+      }
+
+      // Smart scroll observer for content changes
+      const scrollObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+            // New content was added, scroll if near bottom
+            const terminal = document.querySelector(".terminal");
+            const isNearBottom =
+              terminal.scrollTop >=
+              terminal.scrollHeight - terminal.clientHeight - 100;
+
+            if (isNearBottom) {
+              setTimeout(() => {
+                terminal.scrollTo({
+                  top: terminal.scrollHeight,
+                  behavior: "smooth",
+                });
+              }, 50);
+            }
+          }
+        });
+      });
+
+      // Observe the terminal for content changes
+      const terminalContent = document.querySelector(".terminal");
+      scrollObserver.observe(terminalContent, {
+        childList: true,
+        subtree: true,
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
