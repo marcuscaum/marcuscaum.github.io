@@ -13,7 +13,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # Copiar arquivos
 Write-Host "📋 Copiando arquivos..." -ForegroundColor Yellow
-Copy-Item "dist/src/index.html" "dist/index.html" -Force
+# O index.html já está no dist/ direto agora
 Copy-Item "dist/index.html" "./" -Force
 
 # Git operations
