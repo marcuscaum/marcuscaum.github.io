@@ -13,8 +13,14 @@ if ($LASTEXITCODE -ne 0) {
 
 # Copiar arquivos
 Write-Host "📋 Copiando arquivos..." -ForegroundColor Yellow
-# O index.html já está no dist/ direto agora
+# Copiar index.html para a raiz
 Copy-Item "dist/index.html" "./" -Force
+
+# Copiar pasta assets para a raiz (se não existir, criar)
+if (Test-Path "assets") {
+    Remove-Item "assets" -Recurse -Force
+}
+Copy-Item "dist/assets" "./" -Recurse -Force
 
 # Git operations
 Write-Host "🔄 Fazendo commit e push..." -ForegroundColor Yellow
