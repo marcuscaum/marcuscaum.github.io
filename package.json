@@ -1,10 +1,15 @@
 {
-  "name": "marcuscaum.github.io",
+  "name": "marcus-caum-portfolio",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "description": "Marcus Caum's Cyberpunk Terminal Portfolio",
   "scripts": {
-    "build": "browserify src/main.js -o dist/main.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "deploy": "pwsh ./deploy.ps1",
+    "start": "bun run dev"
   },
   "repository": {
     "type": "git",
@@ -17,7 +22,11 @@
   },
   "homepage": "https://github.com/marcuscaum/marcuscaum.github.io#readme",
   "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "babel-preset-env": "^1.1.8"
-  }
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {}
 }

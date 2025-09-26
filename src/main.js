@@ -1,83 +1,38 @@
-var Main = (function() {
+// Main entry point for Marcus Caum's Cyberpunk Terminal Portfolio
+import "./styles/main.css";
+import { TerminalAudio } from "./js/audio-system.js";
+import { RadioSystem } from "./js/radio-system.js";
+import { CRTEffects } from "./js/crt-effects.js";
+import { TerminalCommands } from "./js/terminal-commands.js";
+import { PortfolioCore } from "./js/portfolio-core.js";
 
-  function init() {
-    $(document).on('keypress', function() {
-      createDiv();
-    })
-  }
+// Initialize all systems when DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("🚀 Initializing Marcus Caum Cyberpunk Terminal...");
 
-  function createDiv() {
-    $ball = $('<div class="ball"></div>').css({
-      'left': randomAttributes.width(),
-      'top': randomAttributes.height(),
-      'backgroundColor': randomAttributes.color()
-    });
+  // Initialize core systems
+  const terminalAudio = new TerminalAudio();
+  const radioSystem = new RadioSystem(terminalAudio);
+  const crtEffects = new CRTEffects();
+  const terminalCommands = new TerminalCommands(terminalAudio, radioSystem);
+  const portfolioCore = new PortfolioCore(terminalAudio);
 
+  // Make systems globally available for onclick handlers in HTML
+  window.terminalAudio = terminalAudio;
+  window.radioSystem = radioSystem;
+  window.terminalCommands = terminalCommands;
+  window.portfolioCore = portfolioCore;
 
-    $ball.appendTo('body').delay(500).fadeIn(100, function () {
-      randomAttributes.song();
-      randomAttributes.storytellerMessages();
-      $(this).fadeOut(500, function() {
-        $(this).remove();
-      });
-    });
-  }
+  // Export functions for HTML onclick handlers
+  window.showSection = portfolioCore.showSection.bind(portfolioCore);
+  window.showMainMenu = portfolioCore.showMainMenu.bind(portfolioCore);
+  window.downloadResume = portfolioCore.downloadResume.bind(portfolioCore);
+  window.togglePlayPause = radioSystem.togglePlayPause.bind(radioSystem);
+  window.nextTrack = radioSystem.nextTrack.bind(radioSystem);
+  window.prevTrack = radioSystem.prevTrack.bind(radioSystem);
+  window.shufflePlaylist = radioSystem.shufflePlaylist.bind(radioSystem);
+  window.setVolume = radioSystem.setVolume.bind(radioSystem);
+  window.handleCommand = terminalCommands.handleCommand.bind(terminalCommands);
 
-  var randomAttributes = {
-
-    BALL_SIZE: 100,
-
-    width: function () {
-      return (Math.random() * ($(window).width() - this.BALL_SIZE)).toFixed() + 'px';
-    },
-
-    height: function () {
-      return (Math.random() * ($(window).height() - this.BALL_SIZE)).toFixed() + 'px';
-    },
-
-    color: function () {
-      var rgb = [];
-
-      for(var i = 0; i < 3; i++) {
-        rgb.push(Math.floor(Math.random() * 255));
-      }
-
-      return 'rgb('+ rgb.join(',') +')';
-    },
-
-    song: function () {
-      var randomValue = Math.floor(Math.random() * 12) + 1;
-      var snd = new Audio("sounds/piano/"+ randomValue +".wav"); // buffers automatically when created
-
-      return snd.play();
-    },
-
-    storytellerMessages: (function () {
-
-      var timeWindow = 500;
-      var timeout;
-
-      var storytellerMessages = function (context, args) {
-        var MESSAGES = ["You should keep pressing...", "Who knows what can happen if you keep pressing?", "She pressed me once, once..", "Sometimes i can feel her inside my head, am i dreaming?"];
-
-        var randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-        $('#storyteller').html(randomMessage);
-      };
-
-      return function() {
-        var context = this;
-        var args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function(){
-          storytellerMessages.apply(context, args);
-        }, timeWindow);
-      };
-    }())
-  }
-
-  return {
-    init: init
-  }
-}());
-
-Main.init();
+  console.log("✅ Terminal initialized successfully!");
+});

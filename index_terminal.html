@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MARCUS_CAUM.EXE - Terminal Portfolio</title>
+
+    <meta
+      name="description"
+      content="Marcus Caum - Senior Software Engineer Terminal Interface. Next.js, React, TypeScript, DevOps Expert."
+    />
+    <meta
+      name="keywords"
+      content="Marcus Caum, Senior Software Engineer, Terminal, Cyberpunk, Next.js, React, TypeScript, DevOps"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "terminal-green": "#00ff41",
+              "terminal-bg": "#000",
+              "terminal-dark-green": "#00cc33",
+              "terminal-yellow": "#ffff00",
+            },
+            fontFamily: {
+              mono: ["Share Tech Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Custom styles with Tailwind utilities */
+
+      /* Additional circuit lines */
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            45deg,
+            transparent 49%,
+            rgba(0, 255, 65, 0.1) 50%,
+            transparent 51%
+          ),
+          linear-gradient(
+            -45deg,
+            transparent 49%,
+            rgba(0, 255, 65, 0.08) 50%,
+            transparent 51%
+          );
+        background-size: 60px 60px, 80px 80px;
+        animation: circuitPulse 8s ease-in-out infinite alternate;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes circuitPulse {
+        0% {
+          opacity: 0.2;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0.4;
+          transform: scale(1.02);
+        }
+      }
+
+      /* Custom animations and effects that Tailwind can't handle */
+
+      /* Matrix/Circuit Background */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 255, 65, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 255, 65, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 40%,
+            rgba(0, 255, 65, 0.08) 0%,
+            transparent 50%
+          ),
+          linear-gradient(90deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%),
+          linear-gradient(0deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%),
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 98px,
+            rgba(0, 255, 65, 0.03) 100px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 98px,
+            rgba(0, 255, 65, 0.03) 100px
+          );
+        background-size: 200px 200px, 300px 300px, 150px 150px, 100% 2px,
+          2px 100%, 100px 100px, 100px 100px;
+        animation: circuitFlow 20s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes circuitFlow {
+        0% {
+          background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        }
+        100% {
+          background-position: 100% 100%, -100% -100%, 50% 50%, 100% 0%, 0% 100%,
+            100px 100px, -100px -100px;
+        }
+      }
+
+      .crt-effect {
+        position: relative;
+      }
+
+      /* CRT scanlines covering the entire page */
+      .crt-effect::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          transparent 50%,
+          rgba(0, 255, 65, 0.03) 50%
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      /* CRT horizontal scan effect */
+      .crt-effect::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 255, 65, 0.05),
+          transparent
+        );
+        animation: scan 3s linear infinite;
+        pointer-events: none;
+        z-index: 998;
+      }
+
+      @keyframes scan {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      /* Terminal container styles are now handled by Tailwind classes */
+
+      /* Floating data particles */
+      .terminal::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: radial-gradient(
+            2px 2px at 20px 30px,
+            rgba(0, 255, 65, 0.3),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 40px 70px,
+            rgba(0, 255, 65, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 90px 40px,
+            rgba(0, 255, 65, 0.4),
+            transparent
+          ),
+          radial-gradient(
+            1px 1px at 130px 80px,
+            rgba(0, 255, 65, 0.2),
+            transparent
+          ),
+          radial-gradient(
+            2px 2px at 160px 30px,
+            rgba(0, 255, 65, 0.3),
+            transparent
+          );
+        background-repeat: repeat;
+        background-size: 200px 100px;
+        animation: dataFlow 15s linear infinite;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+
+      @keyframes dataFlow {
+        0% {
+          transform: translateX(0) translateY(0);
+        }
+        100% {
+          transform: translateX(-200px) translateY(-100px);
+        }
+      }
+
+      /* Keep essential animations */
+      .cursor {
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .typewriter {
+        overflow: hidden;
+        white-space: nowrap;
+        margin: 0;
+      }
+
+      /* Utility classes for elements not yet converted */
+      .info-line {
+        margin: 0.25rem 0;
+        padding-left: 0.75rem;
+        color: #00ff41;
+      }
+
+      .highlight {
+        color: #ffff00;
+        background: rgba(255, 255, 0, 0.1);
+        padding: 0 0.25rem;
+      }
+
+      .section {
+        margin: 1.25rem 0;
+        border-left: 2px solid #00ff41;
+        padding-left: 1rem;
+      }
+
+      .section-title {
+        color: #00ff41;
+        font-size: 1.125rem;
+        margin-bottom: 0.75rem;
+        text-decoration: underline;
+      }
+
+      .skill-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .skill-category {
+        border: 1px solid #00cc33;
+        padding: 10px;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .skill-category h4 {
+        color: #00ffff;
+        margin-bottom: 5px;
+      }
+
+      .command-input {
+        background: transparent;
+        border: none;
+        color: #00ff41;
+        font-family: inherit;
+        font-size: inherit;
+        outline: none;
+        width: 200px;
+        caret-color: #00ff41;
+        position: relative;
+        z-index: 1001;
+      }
+
+      /* Make sure command section is always visible and accessible */
+      #command-section {
+        position: sticky;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(5px);
+        border-top: 1px solid #00ff41;
+        padding: 10px;
+        margin-top: 20px;
+        z-index: 1000;
+      }
+
+      /* Smooth scrolling for the entire page */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Custom scrollbar styling */
+      .terminal::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .terminal::-webkit-scrollbar-track {
+        background: #000;
+        border: 1px solid #00ff41;
+      }
+
+      .terminal::-webkit-scrollbar-thumb {
+        background: #00ff41;
+        border-radius: 4px;
+      }
+
+      .terminal::-webkit-scrollbar-thumb:hover {
+        background: #00cc33;
+      }
+
+      /* Radio Controller Styles - Fixed Top Bar */
+      .radio-controller {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        border-bottom: 2px solid #00ff41;
+        padding: 10px 20px;
+        height: 60px;
+        z-index: 1002;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 2px 20px rgba(0, 255, 65, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+
+      .radio-left-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+      }
+
+      .radio-right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .radio-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .radio-btn {
+        background: transparent;
+        border: 1px solid #00ff41;
+        color: #00ff41;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.2s;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .radio-btn:hover {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .radio-btn.active {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+      }
+
+      .radio-title {
+        color: #00ff41;
+        font-size: 16px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .volume-slider {
+        width: 120px;
+        height: 4px;
+        background: #333;
+        border: 1px solid #00ff41;
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 2px;
+      }
+
+      .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        background: #00ff41;
+        cursor: pointer;
+        border-radius: 50%;
+        box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+      }
+
+      .track-info {
+        font-size: 13px;
+        color: #00ff41;
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: normal;
+      }
+
+      .volume-display {
+        font-size: 12px;
+        color: #00cc33;
+        min-width: 35px;
+        text-align: right;
+      }
+
+      #typed-text {
+        color: #00ff41;
+        font-family: inherit;
+        font-size: inherit;
+      }
+
+      .menu-option {
+        cursor: pointer;
+        padding: 5px 10px;
+        margin: 2px 0;
+        transition: all 0.3s;
+      }
+
+      .menu-option:hover {
+        background: rgba(0, 255, 65, 0.2);
+        transform: translateX(10px);
+      }
+
+      .ascii-art {
+        font-size: 0.7em;
+        line-height: 1;
+        color: #00cc33;
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      .status-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 20, 0, 0.95);
+        border-top: 1px solid #00ff41;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9em;
+        height: 40px;
+        box-sizing: border-box;
+        z-index: 1000;
+      }
+
+      .glitch {
+        animation: glitch 2s infinite;
+      }
+
+      @keyframes glitch {
+        0%,
+        90%,
+        100% {
+          transform: translate(0);
+        }
+        92% {
+          transform: translate(-2px, 2px);
+        }
+        94% {
+          transform: translate(2px, -2px);
+        }
+        96% {
+          transform: translate(-2px, -2px);
+        }
+      }
+
+      .loading-bar {
+        width: 100%;
+        height: 20px;
+        border: 1px solid #00ff41;
+        margin: 10px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .loading-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #00ff41, #00cc33);
+        animation: load 3s ease-in-out;
+      }
+
+      @keyframes load {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .terminal {
+          margin: 0;
+          padding: 15px;
+          font-size: 0.9em;
+          height: calc(100vh - 50px);
+          border-radius: 0;
+        }
+
+        .skill-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .status-bar {
+          font-size: 0.8em;
+          padding: 8px 15px;
+          height: 35px;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="crt-effect h-screen w-screen overflow-hidden m-0 p-0 bg-terminal-bg text-terminal-green font-mono relative"
+  >
+    <!-- Radio Controller - Top Bar -->
+    <div id="radio-controller" class="radio-controller">
+      <div class="radio-left-section">
+        <div class="radio-title">📻 CAUM RADIO</div>
+        <div class="track-info" id="current-track">♪ Ready to play...</div>
+      </div>
+
+      <div class="radio-right-section">
+        <div class="radio-controls">
+          <button
+            class="radio-btn"
+            onclick="prevTrack()"
+            title="Previous Track"
+          >
+            ⏮
+          </button>
+          <button
+            class="radio-btn"
+            id="play-pause-btn"
+            onclick="togglePlayPause()"
+            title="Play/Pause"
+          >
+            ▶
+          </button>
+          <button class="radio-btn" onclick="nextTrack()" title="Next Track">
+            ⏭
+          </button>
+          <button
+            class="radio-btn"
+            onclick="shufflePlaylist()"
+            title="Shuffle Playlist"
+          >
+            🔀
+          </button>
+        </div>
+
+        <div class="volume-control">
+          <span class="text-terminal-green">🔊</span>
+          <input
+            type="range"
+            class="volume-slider"
+            id="volume-slider"
+            min="0"
+            max="100"
+            value="50"
+            onchange="setVolume(this.value)"
+          />
+          <span class="volume-display" id="volume-display">50%</span>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="terminal bg-black/85 border-2 border-terminal-green h-[calc(100vh-120px)] w-screen p-5 overflow-y-auto relative backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,65,0.3),inset_0_0_20px_rgba(0,255,65,0.1)]"
+      style="margin-top: 60px"
+    >
+      <div class="text-center border-b border-terminal-green pb-3 mb-5">
+        <div class="text-xl mb-1">CAUM INDUSTRIES UNIFIED OPERATING SYSTEM</div>
+        <div class="text-sm text-terminal-dark-green">
+          Copyright 2025-∞ CAUM INDUSTRIES
+        </div>
+        <div class="text-sm text-terminal-dark-green">
+          Server 01 - Portfolio Module
+        </div>
+      </div>
+
+      <div
+        class="text-xs leading-none text-terminal-dark-green text-center my-5"
+      >
+        <pre>
+   ╔══════════════════════════════════════╗
+   ║     MARCUS CAUM TERMINAL v2.5.1     ║
+   ║     Senior Software Engineer         ║
+   ╚══════════════════════════════════════╝
+            </pre
+        >
+      </div>
+
+      <div class="my-5 border-l-2 border-terminal-green pl-4">
+        <div class="text-terminal-green text-lg mb-3 underline">
+          SYSTEM BOOT SEQUENCE
+        </div>
+        <div
+          class="w-full h-5 border border-terminal-green my-3 relative overflow-hidden"
+        >
+          <div
+            class="loading-fill h-full bg-gradient-to-r from-terminal-green to-terminal-dark-green animate-pulse"
+          ></div>
+        </div>
+        <div id="boot-sequence"></div>
+      </div>
+
+      <div
+        class="my-5 border-l-2 border-terminal-green pl-4 hidden"
+        id="main-menu"
+      >
+        <div class="text-terminal-green text-lg mb-3 underline">
+          MAIN MENU - SELECT OPTION
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('profile')"
+        >
+          ► [1] PERSONNEL FILE
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('skills')"
+        >
+          ► [2] TECHNICAL SPECIFICATIONS
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('experience')"
+        >
+          ► [3] MISSION HISTORY
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('projects')"
+        >
+          ► [4] PROJECT DATABASE
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showSection('contact')"
+        >
+          ► [5] COMMUNICATION PROTOCOLS
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="downloadResume()"
+        >
+          ► [6] DOWNLOAD PERSONNEL DOSSIER
+        </div>
+        <div
+          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+          onclick="showMatrix()"
+        >
+          ► [7] ENTER THE MATRIX
+        </div>
+      </div>
+
+      <div class="section" id="profile-section" style="display: none">
+        <div class="section-title">PERSONNEL FILE - MARCUS_CAUM.DAT</div>
+        <div class="info-line">
+          ► Name: <span class="highlight">Marcus Caum</span>
+        </div>
+        <div class="info-line">
+          ► Designation: <span class="highlight">Senior Software Engineer</span>
+        </div>
+        <div class="info-line">
+          ► Location:
+          <span class="highlight">Francisco Beltrão, PR, Brazil</span>
+        </div>
+        <div class="info-line">
+          ► Experience: <span class="highlight">10+ Years</span>
+        </div>
+        <div class="info-line">
+          ► Status:
+          <span class="highlight">ACTIVE - Available for Remote Missions</span>
+        </div>
+        <br />
+        <div class="info-line">PROFILE SUMMARY:</div>
+        <div class="info-line">
+          Results-driven Senior Software Engineer with extensive
+        </div>
+        <div class="info-line">
+          experience in <span class="highlight">Next.js 15</span>, React,
+          TypeScript, and DevOps.
+        </div>
+        <div class="info-line">
+          Specialized in <span class="highlight">Docker containerization</span>,
+          PostgreSQL,
+        </div>
+        <div class="info-line">
+          Supabase, and modern web technologies. Expert in
+        </div>
+        <div class="info-line">system architecture and team leadership.</div>
+        <br />
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
+
+      <div class="section" id="skills-section" style="display: none">
+        <div class="section-title">TECHNICAL SPECIFICATIONS</div>
+        <div class="skill-grid">
+          <div class="skill-category">
+            <h4>FRONTEND_SYSTEMS.EXE</h4>
+            <div class="info-line">• Next.js 15</div>
+            <div class="info-line">• React & TypeScript</div>
+            <div class="info-line">• Tailwind CSS</div>
+            <div class="info-line">• Jotai & Recoil</div>
+          </div>
+          <div class="skill-category">
+            <h4>BACKEND_CORE.SYS</h4>
+            <div class="info-line">• Node.js</div>
+            <div class="info-line">• PostgreSQL</div>
+            <div class="info-line">• Supabase</div>
+            <div class="info-line">• GraphQL & REST</div>
+          </div>
+          <div class="skill-category">
+            <h4>DEVOPS_MODULE.BIN</h4>
+            <div class="info-line">• Docker</div>
+            <div class="info-line">• Portainer</div>
+            <div class="info-line">• CI/CD Pipelines</div>
+            <div class="info-line">• E2E Testing</div>
+          </div>
+          <div class="skill-category">
+            <h4>SPECIALIZED_TECH.DAT</h4>
+            <div class="info-line">• MapBox API</div>
+            <div class="info-line">• Data Visualization</div>
+            <div class="info-line">• Performance Optimization</div>
+            <div class="info-line">• Team Leadership</div>
+          </div>
+        </div>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
+
+      <div class="section" id="experience-section" style="display: none">
+        <div class="section-title">MISSION HISTORY - CLASSIFIED</div>
+
+        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">CURRENT MISSION:</span> TruckMap Industries
+          </div>
+          <div class="info-line">Duration: 11/2021 - Present (Active)</div>
+          <div class="info-line">Location: Remote - Chicago, IL</div>
+          <div class="info-line">Objectives Completed:</div>
+          <div class="info-line">
+            • Architected scalable applications using
+            <span class="highlight">Next.js 15</span> with TypeScript
+          </div>
+          <div class="info-line">
+            • <span class="highlight">Migrated Recoil → Jotai</span> improving
+            bundle size and performance
+          </div>
+          <div class="info-line">
+            • Developed sophisticated route system using
+            <span class="highlight">Mapbox API</span> and Turf.js
+          </div>
+          <div class="info-line">
+            • Built responsive dashboards with
+            <span class="highlight">Tailwind CSS</span> for shipment management
+          </div>
+          <div class="info-line">
+            • Implemented advanced clustering system for location points
+            optimization
+          </div>
+          <div class="info-line">
+            • Integrated viewport-based location loading with efficient data
+            caching
+          </div>
+          <div class="info-line">
+            • Developed roads restriction visibility based on truck settings
+          </div>
+          <div class="info-line">
+            • Led technical hiring process, validating senior developers' skills
+          </div>
+          <div class="info-line">
+            • Configured comprehensive
+            <span class="highlight">CI/CD pipelines</span> and E2E testing
+            infrastructure
+          </div>
+        </div>
+
+        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PREVIOUS MISSION:</span> Irwin Corporation
+          </div>
+          <div class="info-line">Duration: 03/2020 - 11/2021</div>
+          <div class="info-line">Location: Remote - Toronto, Canada</div>
+          <div class="info-line">Objectives Completed:</div>
+          <div class="info-line">
+            • Built high-performance tables (10K+ rows)
+          </div>
+          <div class="info-line">• React Query optimization implementation</div>
+          <div class="info-line">• React Native app development</div>
+        </div>
+
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
+
+      <div class="section" id="projects-section" style="display: none">
+        <div class="section-title">PROJECT DATABASE</div>
+
+        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PROJECT_ALPHA:</span> TruckMap Route System
+          </div>
+          <div class="info-line">Status: OPERATIONAL</div>
+          <div class="info-line">
+            Tech Stack: Next.js 15, MapBox, Jotai, PostgreSQL
+          </div>
+          <div class="info-line">
+            Features: Real-time routing, clustering, restrictions
+          </div>
+        </div>
+
+        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
+          <div class="info-line">
+            <span class="highlight">PROJECT_BETA:</span> High-Performance Data
+            Tables
+          </div>
+          <div class="info-line">Status: COMPLETED</div>
+          <div class="info-line">
+            Tech Stack: React, TypeScript, Virtualization
+          </div>
+          <div class="info-line">
+            Features: 10K+ rows, React Query, Filtering
+          </div>
+        </div>
+
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
+
+      <div class="section" id="contact-section" style="display: none">
+        <div class="section-title">COMMUNICATION PROTOCOLS</div>
+        <div class="info-line">
+          ► Email: <span class="highlight">marcuslucas.jb@gmail.com</span>
+        </div>
+        <div class="info-line">
+          ► LinkedIn: <span class="highlight">linkedin.com/in/marcuscaum</span>
+        </div>
+        <div class="info-line">
+          ► GitHub: <span class="highlight">github.com/marcuscaum</span>
+        </div>
+        <div class="info-line">
+          ► Phone: <span class="highlight">+55 46 99935 1423</span>
+        </div>
+        <br />
+        <div class="info-line">SECURE CHANNELS AVAILABLE:</div>
+        <div
+          class="menu-option"
+          onclick="window.open('mailto:marcuslucas.jb@gmail.com')"
+        >
+          ► [1] SEND ENCRYPTED MESSAGE
+        </div>
+        <div
+          class="menu-option"
+          onclick="window.open('https://linkedin.com/in/marcuscaum', '_blank')"
+        >
+          ► [2] CONNECT VIA LINKEDIN
+        </div>
+        <div
+          class="menu-option"
+          onclick="window.open('https://github.com/marcuscaum', '_blank')"
+        >
+          ► [3] ACCESS CODE REPOSITORY
+        </div>
+        <br />
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] RETURN TO MAIN MENU
+        </div>
+      </div>
+
+      <div class="section" id="matrix-section" style="display: none">
+        <div class="section-title glitch">ENTERING THE MATRIX...</div>
+        <div class="ascii-art">
+          <pre id="matrix-rain"></pre>
+        </div>
+        <div class="menu-option" onclick="showMainMenu()">
+          ► [ESC] EXIT MATRIX
+        </div>
+      </div>
+
+      <div
+        class="my-5 border-l-2 border-terminal-green pl-4"
+        id="command-section"
+      >
+        <div class="text-terminal-green text-lg mb-3 underline">
+          COMMAND LINE INTERFACE
+        </div>
+        <div id="command-output" class="mb-3"></div>
+        <div class="relative flex items-center">
+          <span class="text-terminal-green mr-2">marcus@portfolio:~$</span>
+          <input
+            type="text"
+            class="command-input bg-transparent border-0 text-terminal-green font-mono outline-0 flex-1 min-w-0"
+            id="command-input"
+            placeholder="type 'help' for commands"
+            onkeypress="handleCommand(event)"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <span
+            class="cursor bg-terminal-green animate-pulse inline-block w-2 h-4 ml-1"
+            >&nbsp;</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="fixed bottom-0 left-0 right-0 bg-black/95 border-t border-terminal-green py-2 px-5 flex justify-between text-sm h-10 z-[1000]"
+    >
+      <span>SYSTEM STATUS: ONLINE</span>
+      <span>USER: VISITOR</span>
+      <span id="current-time"></span>
+      <span>CONNECTION: SECURE</span>
+    </div>
+
+    <script>
+      let currentSection = "boot";
+      let bootIndex = 0;
+
+      // Radio System for Background Music
+      class RadioSystem {
+        constructor() {
+          this.playlist = [
+            "sounds/radio/Allan Gray - Swing Doors.mp3",
+            "sounds/radio/Billie Holiday - Crazy He Calls Me.mp3",
+            "sounds/radio/Billie Holiday- Easy Living.mp3",
+            "sounds/radio/Billy Munn - Jazzy Interlude.mp3",
+            "sounds/radio/Bob Crosby and The Bobcats - Happy Times.mp3",
+            "sounds/radio/Bob Crosby and The Bobcats - Way Back Home.mp3",
+            "sounds/radio/Cole Porter - Anything Goes.mp3",
+            "sounds/radio/Danny Kaye and The Andrews Sisters - Civilization.mp3",
+            "sounds/radio/Eddy Christiani and Frans Poptie - Rythm For You.mp3",
+            "sounds/radio/Gerhard Trede - Fox Boogie.mp3",
+            "sounds/radio/Gerhard Trede - Jolly Days.mp3",
+            "sounds/radio/Jack Shaindlin - I'm Tickled Pink.mp3",
+            "sounds/radio/Jack Shaindlin - Let's Go Sunning.mp3",
+          ];
+
+          this.currentTrackIndex = 0;
+          this.isPlaying = false;
+          this.isShuffled = false;
+          this.audio = new Audio();
+          this.volume = 0.5;
+
+          this.setupAudioEvents();
+          this.loadCurrentTrack();
+        }
+
+        setupAudioEvents() {
+          this.audio.addEventListener("ended", () => {
+            this.nextTrack();
+          });
+
+          this.audio.addEventListener("loadstart", () => {
+            this.updateTrackInfo("Loading...");
+          });
+
+          this.audio.addEventListener("canplay", () => {
+            this.updateTrackInfo();
+          });
+
+          this.audio.addEventListener("error", (e) => {
+            console.log("Radio audio error:", e);
+            this.updateTrackInfo("Error loading track");
+            setTimeout(() => this.nextTrack(), 2000);
+          });
+        }
+
+        loadCurrentTrack() {
+          const track = this.playlist[this.currentTrackIndex];
+          this.audio.src = track;
+          this.audio.volume = this.volume;
+          this.updateTrackInfo();
+        }
+
+        updateTrackInfo(customText = null) {
+          const trackElement = document.getElementById("current-track");
+          if (customText) {
+            trackElement.textContent = customText;
+            return;
+          }
+
+          const track = this.playlist[this.currentTrackIndex];
+          const filename = track.split("/").pop().replace(".mp3", "");
+
+          if (this.isPlaying) {
+            trackElement.textContent = `♪ NOW PLAYING: ${filename}`;
+          } else {
+            trackElement.textContent = `♪ QUEUED: ${filename}`;
+          }
+        }
+
+        play() {
+          if (this.audio.src) {
+            this.audio
+              .play()
+              .then(() => {
+                this.isPlaying = true;
+                this.updatePlayButton();
+                this.updateTrackInfo();
+                terminalAudio.playSound("menuSelect");
+              })
+              .catch((e) => {
+                console.log("Radio play error:", e);
+                this.updateTrackInfo("Playback error");
+              });
+          }
+        }
+
+        pause() {
+          this.audio.pause();
+          this.isPlaying = false;
+          this.updatePlayButton();
+          this.updateTrackInfo();
+        }
+
+        togglePlayPause() {
+          if (this.isPlaying) {
+            this.pause();
+          } else {
+            this.play();
+          }
+        }
+
+        nextTrack() {
+          this.currentTrackIndex =
+            (this.currentTrackIndex + 1) % this.playlist.length;
+          this.loadCurrentTrack();
+          if (this.isPlaying) {
+            this.play();
+          }
+        }
+
+        prevTrack() {
+          this.currentTrackIndex =
+            this.currentTrackIndex === 0
+              ? this.playlist.length - 1
+              : this.currentTrackIndex - 1;
+          this.loadCurrentTrack();
+          if (this.isPlaying) {
+            this.play();
+          }
+        }
+
+        shufflePlaylist() {
+          // Fisher-Yates shuffle algorithm
+          const shuffled = [...this.playlist];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+
+          this.playlist = shuffled;
+          this.currentTrackIndex = 0;
+          this.loadCurrentTrack();
+          this.isShuffled = !this.isShuffled;
+
+          terminalAudio.playSound("menuSelect");
+          this.updateTrackInfo("Playlist shuffled!");
+          setTimeout(() => this.updateTrackInfo(), 2000);
+        }
+
+        setVolume(volume) {
+          this.volume = volume / 100;
+          this.audio.volume = this.volume;
+          document.getElementById("volume-display").textContent = `${volume}%`;
+        }
+
+        updatePlayButton() {
+          const btn = document.getElementById("play-pause-btn");
+          btn.textContent = this.isPlaying ? "⏸" : "▶";
+          btn.className = this.isPlaying ? "radio-btn active" : "radio-btn";
+        }
+      }
+
+      // Audio System with Real Terminal Sounds
+      class TerminalAudio {
+        constructor() {
+          this.isEnabled = true;
+          this.sounds = {};
+          this.backgroundLoop = null;
+          this.initAudio();
+        }
+
+        async initAudio() {
+          try {
+            // Preload all audio files
+            const soundFiles = {
+              // Boot sounds
+              powerOn: "sounds/poweron.mp3",
+              powerOff: "sounds/poweroff.mp3",
+
+              // Typing sounds - single characters
+              type1: "sounds/ui_hacking_charsingle_01.wav",
+              type2: "sounds/ui_hacking_charsingle_02.wav",
+              type3: "sounds/ui_hacking_charsingle_03.wav",
+              type4: "sounds/ui_hacking_charsingle_04.wav",
+              type5: "sounds/ui_hacking_charsingle_05.wav",
+              type6: "sounds/ui_hacking_charsingle_06.wav",
+
+              // Menu navigation
+              enter1: "sounds/ui_hacking_charenter_01.wav",
+              enter2: "sounds/ui_hacking_charenter_02.wav",
+              enter3: "sounds/ui_hacking_charenter_03.wav",
+
+              // Background/scrolling
+              scroll: "sounds/ui_hacking_charscroll.wav",
+              scrollLoop: "sounds/ui_hacking_charscroll_lp.wav",
+
+              // Piano easter egg
+              piano1: "sounds/piano/1.wav",
+              piano2: "sounds/piano/2.wav",
+              piano3: "sounds/piano/3.wav",
+              piano4: "sounds/piano/4.wav",
+              piano5: "sounds/piano/5.wav",
+            };
+
+            // Load all sounds
+            for (const [key, path] of Object.entries(soundFiles)) {
+              this.sounds[key] = new Audio(path);
+              this.sounds[key].preload = "auto";
+              this.sounds[key].volume = 0.3; // Default volume
+            }
+
+            // Set specific volumes
+            this.sounds.powerOn.volume = 0.4;
+            this.sounds.powerOff.volume = 0.4;
+            this.sounds.scrollLoop.volume = 0.1;
+            this.sounds.scroll.volume = 0.2;
+
+            // Start background ambience
+            this.startBackgroundAmbience();
+          } catch (error) {
+            console.log("Audio loading failed:", error);
+          }
+        }
+
+        // Background ambience
+        startBackgroundAmbience() {
+          if (!this.isEnabled || !this.sounds.scrollLoop) return;
+
+          // Play subtle scrolling loop in background
+          const playAmbience = () => {
+            if (this.isEnabled && Math.random() < 0.4) {
+              // 40% chance
+              this.playSound("scroll");
+            }
+          };
+
+          this.backgroundLoop = setInterval(
+            playAmbience,
+            3000 + Math.random() * 4000
+          );
+        }
+
+        // Generic sound player with random variation
+        playSound(soundKey, volume = null) {
+          if (!this.isEnabled || !this.sounds[soundKey]) return;
+
+          try {
+            const sound = this.sounds[soundKey].cloneNode();
+            if (volume) sound.volume = volume;
+
+            // Add slight pitch variation for realism
+            if (sound.mozPreservesPitch !== undefined) {
+              sound.mozPreservesPitch = false;
+            } else if (sound.webkitPreservesPitch !== undefined) {
+              sound.webkitPreservesPitch = false;
+            }
+
+            sound.playbackRate = 0.9 + Math.random() * 0.2; // Vary pitch slightly
+            sound.play().catch((e) => console.log("Audio play failed:", e));
+          } catch (error) {
+            console.log("Sound playback error:", error);
+          }
+        }
+
+        // Typing sound with variation
+        playKeyPress() {
+          if (!this.isEnabled) return;
+
+          // Randomly select from typing sounds
+          const typeSounds = [
+            "type1",
+            "type2",
+            "type3",
+            "type4",
+            "type5",
+            "type6",
+          ];
+          const randomSound =
+            typeSounds[Math.floor(Math.random() * typeSounds.length)];
+          this.playSound(randomSound, 0.2 + Math.random() * 0.2);
+        }
+
+        // Menu selection sound
+        playMenuSelect() {
+          if (!this.isEnabled) return;
+
+          // Randomly select from enter sounds
+          const enterSounds = ["enter1", "enter2", "enter3"];
+          const randomSound =
+            enterSounds[Math.floor(Math.random() * enterSounds.length)];
+          this.playSound(randomSound, 0.3);
+        }
+
+        // Boot sound
+        playBootSound() {
+          if (!this.isEnabled) return;
+          this.playSound("powerOn", 0.4);
+        }
+
+        // Error sound - play power off sound
+        playError() {
+          if (!this.isEnabled) return;
+
+          // Use power off sound for errors, play 3 times quickly
+          for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+              this.playSound("powerOff", 0.3);
+            }, i * 200);
+          }
+        }
+
+        // Power off sound (for shutdown/exit)
+        playPowerOff() {
+          if (!this.isEnabled) return;
+          this.playSound("powerOff", 0.4);
+        }
+
+        // Matrix sound effect
+        playMatrixSound() {
+          if (!this.isEnabled) return;
+          this.playSound("scrollLoop", 0.15);
+        }
+
+        // Easter egg: piano melody
+        playPianoMelody() {
+          if (!this.isEnabled) return;
+
+          const melody = [
+            "piano1",
+            "piano2",
+            "piano3",
+            "piano2",
+            "piano4",
+            "piano5",
+          ];
+          melody.forEach((note, index) => {
+            setTimeout(() => {
+              this.playSound(note, 0.4);
+            }, index * 400);
+          });
+        }
+
+        toggle() {
+          this.isEnabled = !this.isEnabled;
+          if (!this.isEnabled && this.backgroundLoop) {
+            clearInterval(this.backgroundLoop);
+            this.backgroundLoop = null;
+          } else if (this.isEnabled) {
+            this.startBackgroundAmbience();
+          }
+
+          // Update status bar
+          const audioStatus = document.getElementById("audio-status");
+          if (audioStatus) {
+            audioStatus.textContent = `AUDIO: ${this.isEnabled ? "ON" : "OFF"}`;
+            audioStatus.style.color = this.isEnabled ? "#00ff41" : "#ff4444";
+          }
+        }
+      }
+
+      // Initialize audio system
+      const terminalAudio = new TerminalAudio();
+
+      // Initialize radio system
+      const radioSystem = new RadioSystem();
+
+      // Radio control functions
+      function togglePlayPause() {
+        radioSystem.togglePlayPause();
+      }
+
+      function nextTrack() {
+        radioSystem.nextTrack();
+      }
+
+      function prevTrack() {
+        radioSystem.prevTrack();
+      }
+
+      function shufflePlaylist() {
+        radioSystem.shufflePlaylist();
+      }
+
+      function setVolume(volume) {
+        radioSystem.setVolume(volume);
+      }
+
+      const bootMessages = [
+        "INITIALIZING NEURAL NETWORK...",
+        "LOADING PERSONAL DATABASE...",
+        "SCANNING FOR AVAILABLE PROJECTS...",
+        "CONNECTING TO GITHUB REPOSITORY...",
+        "VERIFYING SECURITY CLEARANCE...",
+        "LOADING SKILL MODULES...",
+        "ESTABLISHING COMMUNICATION PROTOCOLS...",
+        "SYSTEM READY - WELCOME TO THE MARCUS CAUM INTERFACE",
+      ];
+
+      function typeWriter(element, text, speed = 50, callback) {
+        let i = 0;
+        element.innerHTML = "";
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            terminalAudio.playKeyPress();
+            i++;
+            setTimeout(type, speed);
+          } else if (callback) {
+            callback();
+          }
+        }
+        type();
+      }
+
+      function bootSequence() {
+        const bootElement = document.getElementById("boot-sequence");
+
+        if (bootIndex < bootMessages.length) {
+          const line = document.createElement("div");
+          line.className = "info-line";
+          bootElement.appendChild(line);
+
+          typeWriter(line, "► " + bootMessages[bootIndex], 30, () => {
+            bootIndex++;
+
+            // Auto-scroll during boot sequence
+            setTimeout(() => {
+              const terminal = document.querySelector(".terminal");
+              terminal.scrollTop = terminal.scrollHeight;
+            }, 100);
+
+            setTimeout(bootSequence, 500);
+          });
+        } else {
+          setTimeout(() => {
+            document.querySelector(".section").style.display = "none";
+            document.getElementById("main-menu").style.display = "block";
+            currentSection = "main";
+
+            // Scroll to show main menu
+            setTimeout(smoothScrollToBottom, 300);
+          }, 1000);
+        }
+      }
+
+      function showSection(section) {
+        // Hide all sections
+        const sections = [
+          "main-menu",
+          "profile-section",
+          "skills-section",
+          "experience-section",
+          "projects-section",
+          "contact-section",
+          "matrix-section",
+        ];
+        sections.forEach((s) => {
+          document.getElementById(s).style.display = "none";
+        });
+
+        // Show selected section
+        document.getElementById(section + "-section").style.display = "block";
+        currentSection = section;
+
+        if (section === "matrix") {
+          startMatrix();
+        }
+      }
+
+      function showMainMenu() {
+        const sections = [
+          "profile-section",
+          "skills-section",
+          "experience-section",
+          "projects-section",
+          "contact-section",
+          "matrix-section",
+        ];
+        sections.forEach((s) => {
+          document.getElementById(s).style.display = "none";
+        });
+        document.getElementById("main-menu").style.display = "block";
+        currentSection = "main";
+      }
+
+      function handleCommand(event) {
+        terminalAudio.playKeyPress();
+
+        if (event.key === "Enter") {
+          const input = document.getElementById("command-input");
+          const output = document.getElementById("command-output");
+          const command = input.value.toLowerCase().trim();
+
+          let response = "";
+
+          switch (command) {
+            case "help":
+              response = `
+► Available commands:
+  • help - Show this help menu
+  • about - Show profile information
+  • skills - Display technical skills
+  • experience - Show work history
+  • projects - List projects
+  • contact - Show contact information
+  • download - Download resume
+  • clear - Clear terminal
+  • matrix - Enter the matrix
+  • whoami - Current user info
+  
+► Radio commands:
+  • radio play - Start radio playback
+  • radio pause - Pause radio playback
+  • radio next - Next track
+  • radio prev - Previous track
+  • radio shuffle - Shuffle playlist
+  • radio volume [0-100] - Set volume`;
+              break;
+            case "about":
+              showSectionWithScroll("profile");
+              response = "► Loading personnel file...";
+              break;
+            case "skills":
+              showSectionWithScroll("skills");
+              response = "► Accessing technical specifications...";
+              break;
+            case "experience":
+              showSectionWithScroll("experience");
+              response = "► Retrieving mission history...";
+              break;
+            case "projects":
+              showSectionWithScroll("projects");
+              response = "► Opening project database...";
+              break;
+            case "contact":
+              showSectionWithScroll("contact");
+              response = "► Establishing communication protocols...";
+              break;
+            case "download":
+              downloadResume();
+              response = "► Generating personnel dossier...";
+              break;
+            case "clear":
+              output.innerHTML = "";
+              input.value = "";
+              document.getElementById("typed-text").textContent = "";
+              return;
+            case "matrix":
+              showSection("matrix");
+              response = "► Entering the matrix...";
+              break;
+            case "whoami":
+              response =
+                "► Current user: VISITOR\n► Access level: PUBLIC\n► Location: WEB_INTERFACE";
+              break;
+
+            // Radio commands
+            case "radio":
+            case "radio play":
+              radioSystem.play();
+              response = "► Radio playback started";
+              break;
+            case "radio pause":
+              radioSystem.pause();
+              response = "► Radio playback paused";
+              break;
+            case "radio next":
+              radioSystem.nextTrack();
+              response = "► Switched to next track";
+              break;
+            case "radio prev":
+              radioSystem.prevTrack();
+              response = "► Switched to previous track";
+              break;
+            case "radio shuffle":
+              radioSystem.shufflePlaylist();
+              response = "► Playlist shuffled";
+              break;
+            default:
+              // Check for radio volume command
+              if (command.startsWith("radio volume ")) {
+                const volumeValue = command.split(" ")[2];
+                const volume = parseInt(volumeValue);
+                if (volume >= 0 && volume <= 100) {
+                  radioSystem.setVolume(volume);
+                  document.getElementById("volume-slider").value = volume;
+                  response = `► Radio volume set to ${volume}%`;
+                } else {
+                  response = "► Invalid volume. Use: radio volume [0-100]";
+                }
+              } else {
+                response = `► Command '${command}' not recognized. Type 'help' for available commands.`;
+              }
+          }
+
+          const commandLine = document.createElement("div");
+          commandLine.innerHTML = `<span class="prompt">marcus@portfolio:~$</span> ${input.value}`;
+          output.appendChild(commandLine);
+
+          const responseLine = document.createElement("div");
+          responseLine.innerHTML = response;
+          responseLine.style.whiteSpace = "pre-line";
+          output.appendChild(responseLine);
+
+          input.value = "";
+
+          // Auto-scroll to show new content
+          output.scrollTop = output.scrollHeight;
+
+          // Also ensure the terminal scrolls to show the output
+          setTimeout(() => {
+            const terminal = document.querySelector(".terminal");
+            terminal.scrollTop = terminal.scrollHeight;
+          }, 100);
+        }
+      }
+
+      function downloadResume() {
+        // Simple print functionality for now
+        window.print();
+      }
+
+      function startMatrix() {
+        const matrixElement = document.getElementById("matrix-rain");
+        let matrix = "";
+        const characters =
+          "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+
+        for (let i = 0; i < 20; i++) {
+          let line = "";
+          for (let j = 0; j < 50; j++) {
+            line += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
+          }
+          matrix += line + "\n";
+        }
+
+        matrixElement.textContent = matrix;
+
+        // Animate the matrix
+        setInterval(() => {
+          if (currentSection === "matrix") {
+            matrix = "";
+            for (let i = 0; i < 20; i++) {
+              let line = "";
+              for (let j = 0; j < 50; j++) {
+                line += characters.charAt(
+                  Math.floor(Math.random() * characters.length)
+                );
+              }
+              matrix += line + "\n";
+            }
+            matrixElement.textContent = matrix;
+          }
+        }, 100);
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById("current-time").textContent = timeString;
+      }
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(bootSequence, 1000);
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Focus on command input
+        document.getElementById("command-input").focus();
+      });
+
+      // Keep focus on command input at all times
+      function maintainFocus() {
+        const commandInput = document.getElementById("command-input");
+        if (commandInput && document.activeElement !== commandInput) {
+          commandInput.focus();
+        }
+      }
+
+      // Multiple event listeners to ensure input stays focused
+      document.addEventListener("click", function (e) {
+        // Don't focus if clicking on links or buttons that need interaction
+        if (e.target.tagName !== "A" && !e.target.onclick && !e.target.href) {
+          terminalAudio.playMenuSelect();
+          setTimeout(maintainFocus, 10);
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        // Redirect all keyboard input to command input except for special keys
+        const commandInput = document.getElementById("command-input");
+        if (
+          document.activeElement !== commandInput &&
+          e.key !== "Tab" &&
+          !e.ctrlKey &&
+          !e.altKey &&
+          !e.metaKey
+        ) {
+          commandInput.focus();
+        }
+      });
+
+      // Focus when window regains focus
+      window.addEventListener("focus", maintainFocus);
+
+      // Prevent input from losing focus on blur (unless specifically needed)
+      document
+        .getElementById("command-input")
+        .addEventListener("blur", function () {
+          setTimeout(maintainFocus, 10);
+        });
+
+      // Scroll management system
+      let scrollTimeout;
+      let isScrolling = false;
+
+      function smoothScrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }
+
+      function smoothScrollToBottom() {
+        const terminal = document.querySelector(".terminal");
+        terminal.scrollTo({
+          top: terminal.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+
+      // Add scroll event listener with audio feedback
+      document
+        .querySelector(".terminal")
+        .addEventListener("scroll", function () {
+          if (!isScrolling) {
+            terminalAudio.playSound("scroll");
+            isScrolling = true;
+          }
+
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+          }, 150);
+        });
+
+      // Auto-scroll to command section when sections change
+      function showSectionWithScroll(sectionName) {
+        showSection(sectionName);
+        setTimeout(() => {
+          const commandSection = document.getElementById("command-section");
+          commandSection.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+        }, 300);
+      }
+
+      // Smart scroll observer for content changes
+      const scrollObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+            // New content was added, scroll if near bottom
+            const terminal = document.querySelector(".terminal");
+            const isNearBottom =
+              terminal.scrollTop >=
+              terminal.scrollHeight - terminal.clientHeight - 100;
+
+            if (isNearBottom) {
+              setTimeout(() => {
+                terminal.scrollTo({
+                  top: terminal.scrollHeight,
+                  behavior: "smooth",
+                });
+              }, 50);
+            }
+          }
+        });
+      });
+
+      // Observe the terminal for content changes
+      const terminalContent = document.querySelector(".terminal");
+      scrollObserver.observe(terminalContent, {
+        childList: true,
+        subtree: true,
+      });
+    </script>
+  </body>
+</html>
