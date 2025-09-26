@@ -1333,9 +1333,51 @@
     </div>
 
     <script>
+      // Fullscreen functionality
+      function enterFullscreen() {
+        const element = document.documentElement;
+        
+        if (element.requestFullscreen) {
+          element.requestFullscreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+        } else if (element.mozRequestFullScreen) {
+          // Firefox
+          element.mozRequestFullScreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+        } else if (element.webkitRequestFullscreen) {
+          // Chrome, Safari and Opera
+          element.webkitRequestFullscreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+        } else if (element.msRequestFullscreen) {
+          // IE/Edge
+          element.msRequestFullscreen().catch(err => {
+            console.log(`Error attempting to enable fullscreen: ${err.message}`);
+          });
+        }
+      }
+
+      // Function to exit fullscreen (for future use)
+      function exitFullscreen() {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+        }
+      }
+
       // Robot verification function
       function handleRobotResponse(isRobot) {
         if (isRobot) {
+          // Request fullscreen access
+          enterFullscreen();
+          
           // User admits to being a robot - show terminal and initialize portfolio
           document.getElementById("robot-check").style.display = "none";
           document.getElementById("main-terminal-content").style.display =
