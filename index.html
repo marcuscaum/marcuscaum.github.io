@@ -83,8 +83,8 @@
 
       /* Custom animations and effects that Tailwind can't handle */
 
-      /* Matrix/Circuit Background */
-      body::before {
+      /* Matrix/Circuit Background - moved to ::after */
+      body::after {
         content: "";
         position: fixed;
         top: 0;
@@ -139,9 +139,25 @@
 
       .crt-effect {
         position: relative;
+        /* Screen curvature simulation - no rounded borders */
+        transform: perspective(1000px) rotateX(0.5deg);
+        filter: brightness(1.1) contrast(1.2) saturate(1.3)
+          drop-shadow(0 0 20px rgba(0, 255, 65, 0.3));
+        animation: crtGlow 6s ease-in-out infinite alternate;
       }
 
-      /* CRT scanlines covering the entire page */
+      @keyframes crtGlow {
+        0% {
+          filter: brightness(1.1) contrast(1.2) saturate(1.3)
+            drop-shadow(0 0 20px rgba(0, 255, 65, 0.3));
+        }
+        100% {
+          filter: brightness(1.15) contrast(1.25) saturate(1.35)
+            drop-shadow(0 0 30px rgba(0, 255, 65, 0.4));
+        }
+      }
+
+      /* CRT scanlines covering the entire page - INTENSIFIED */
       .crt-effect::before {
         content: "";
         position: fixed;
@@ -149,16 +165,22 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: linear-gradient(
-          transparent 50%,
-          rgba(0, 255, 65, 0.03) 50%
-        );
-        background-size: 100% 4px;
+        background: linear-gradient(transparent 50%, rgba(0, 255, 65, 0.08) 50%),
+          linear-gradient(90deg, transparent 30%, rgba(0, 255, 65, 0.02) 70%),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.4) 2px,
+            rgba(0, 0, 0, 0.4) 3px
+          );
+        background-size: 100% 3px, 100% 6px, 100% 3px;
         pointer-events: none;
-        z-index: 999;
+        z-index: 9999;
+        animation: flicker 2s ease-in-out infinite alternate;
       }
 
-      /* CRT horizontal scan effect */
+      /* CRT horizontal scan effect - INTENSIFIED */
       .crt-effect::after {
         content: "";
         position: fixed;
@@ -169,12 +191,12 @@
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(0, 255, 65, 0.05),
+          rgba(0, 255, 65, 0.15),
           transparent
         );
-        animation: scan 3s linear infinite;
         pointer-events: none;
-        z-index: 998;
+        z-index: 9998;
+        box-shadow: 0 0 100px rgba(0, 255, 65, 0.1) inset;
       }
 
       @keyframes scan {
@@ -186,7 +208,175 @@
         }
       }
 
+      /* CRT Flicker Effect - Suavizado */
+      @keyframes flicker {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.99;
+        }
+        100% {
+          opacity: 0.98;
+        }
+      }
+
+      /* CRT Screen Curvature and Vignette */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            ellipse at center,
+            transparent 60%,
+            rgba(0, 0, 0, 0.8) 100%
+          ),
+          radial-gradient(
+            circle at 20% 80%,
+            rgba(0, 255, 65, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 255, 65, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 40%,
+            rgba(0, 255, 65, 0.12) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: 9997;
+        animation: screenPulse 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes screenPulse {
+        0% {
+          filter: brightness(1) contrast(1.1);
+          transform: scale(1);
+        }
+        100% {
+          filter: brightness(1.02) contrast(1.15);
+          transform: scale(1.001);
+        }
+      }
+
+      /* CRT RGB Distortion Effect - Suavizado */
+      .terminal {
+        text-shadow: 0.3px 0 0 #ff0000, -0.3px 0 0 #00ffff,
+          0 0 3px rgba(0, 255, 65, 0.4), 0 0 6px rgba(0, 255, 65, 0.2),
+          0 0 10px rgba(0, 255, 65, 0.1);
+        animation: textGlow 4s ease-in-out infinite alternate;
+      }
+
+      @keyframes textGlow {
+        0% {
+          text-shadow: 0.3px 0 0 #ff0000, -0.3px 0 0 #00ffff,
+            0 0 3px rgba(0, 255, 65, 0.4), 0 0 6px rgba(0, 255, 65, 0.2),
+            0 0 10px rgba(0, 255, 65, 0.1);
+        }
+        100% {
+          text-shadow: 0.4px 0 0 #ff0000, -0.4px 0 0 #00ffff,
+            0 0 4px rgba(0, 255, 65, 0.5), 0 0 8px rgba(0, 255, 65, 0.3),
+            0 0 12px rgba(0, 255, 65, 0.15);
+        }
+      }
+
+      /* Phosphor Trails Effect */
+      .terminal * {
+        transition: all 0.1s ease-out;
+      }
+
       /* Terminal container styles are now handled by Tailwind classes */
+
+      /* CRT Static Noise Overlay - Additional Layer */
+      .terminal:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(255, 255, 255, 0.01) 2px,
+            rgba(255, 255, 255, 0.01) 4px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 65, 0.02) 2px,
+            rgba(0, 255, 65, 0.02) 4px
+          );
+        animation: staticNoise 3s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 10;
+        mix-blend-mode: screen;
+      }
+
+      @keyframes staticNoise {
+        0% {
+          transform: translate(0px, 0px);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(0.5px, -0.5px);
+          opacity: 0.6;
+        }
+        100% {
+          transform: translate(0px, 0px);
+          opacity: 0.5;
+        }
+      }
+
+      /* CRT Beam Effect */
+      .crt-beam {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(
+          0deg,
+          transparent 0%,
+          rgba(0, 255, 65, 0.02) 50%,
+          transparent 100%
+        );
+        animation: beamSweep 12s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 9996;
+        mix-blend-mode: screen;
+      }
+
+      @keyframes beamSweep {
+        0% {
+          transform: translateY(-100vh) scaleY(0.1);
+          opacity: 0;
+        }
+        10% {
+          transform: translateY(-50vh) scaleY(0.3);
+          opacity: 0.15;
+        }
+        50% {
+          transform: translateY(0) scaleY(1);
+          opacity: 0.25;
+        }
+        90% {
+          transform: translateY(50vh) scaleY(0.3);
+          opacity: 0.15;
+        }
+        100% {
+          transform: translateY(100vh) scaleY(0.1);
+          opacity: 0;
+        }
+      }
 
       /* Floating data particles */
       .terminal::after {
@@ -318,14 +508,12 @@
 
       /* Make sure command section is always visible and accessible */
       #command-section {
-        position: sticky;
-        bottom: 0;
         background: rgba(0, 0, 0, 0.95);
         backdrop-filter: blur(5px);
         border-top: 1px solid #00ff41;
-        padding: 10px;
-        margin-top: 20px;
-        z-index: 1000;
+        padding: 10px 20px;
+        margin: 0;
+        box-shadow: 0 -2px 20px rgba(0, 255, 65, 0.3);
       }
 
       /* Smooth scrolling for the entire page */
@@ -345,11 +533,127 @@
 
       .terminal::-webkit-scrollbar-thumb {
         background: #00ff41;
-        border-radius: 4px;
       }
 
       .terminal::-webkit-scrollbar-thumb:hover {
         background: #00cc33;
+      }
+
+      /* Radio Controller Styles - Fixed Bottom Bar */
+      .radio-controller {
+        position: fixed;
+        bottom: 40px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.95);
+        border-top: 2px solid #00ff41;
+        padding: 10px 20px;
+        height: 60px;
+        z-index: 1002;
+        backdrop-filter: blur(15px);
+        box-shadow: 0 -2px 20px rgba(0, 255, 65, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+      }
+
+      .radio-left-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex: 1;
+      }
+
+      .radio-right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .radio-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .radio-btn {
+        background: transparent;
+        border: 1px solid #00ff41;
+        color: #00ff41;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: bold;
+        transition: all 0.2s;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .radio-btn:hover {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .radio-btn.active {
+        background: #00ff41;
+        color: #000;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
+      }
+
+      .radio-title {
+        color: #00ff41;
+        font-size: 16px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .volume-slider {
+        width: 120px;
+        height: 4px;
+        background: #333;
+        border: 1px solid #00ff41;
+        outline: none;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        background: #00ff41;
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+      }
+
+      .track-info {
+        font-size: 13px;
+        color: #00ff41;
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: normal;
+      }
+
+      .volume-display {
+        font-size: 12px;
+        color: #00cc33;
+        min-width: 35px;
+        text-align: right;
       }
 
       #typed-text {
@@ -444,7 +748,7 @@
           margin: 0;
           padding: 15px;
           font-size: 0.9em;
-          height: calc(100vh - 50px);
+          height: calc(100vh - 140px);
           border-radius: 0;
         }
 
@@ -457,19 +761,48 @@
           padding: 8px 15px;
           height: 35px;
         }
+
+        .radio-controller {
+          padding: 8px 15px;
+          height: 50px;
+          bottom: 35px;
+        }
+
+        .radio-title {
+          font-size: 14px;
+        }
+
+        .track-info {
+          font-size: 12px;
+          max-width: 150px;
+        }
+
+        .radio-btn {
+          padding: 4px 8px;
+          font-size: 12px;
+          height: 28px;
+        }
+
+        .volume-slider {
+          width: 80px;
+        }
       }
     </style>
   </head>
   <body
     class="crt-effect h-screen w-screen overflow-hidden m-0 p-0 bg-terminal-bg text-terminal-green font-mono relative"
   >
+    <!-- CRT Beam Effect -->
+    <div class="crt-beam"></div>
     <div
-      class="terminal bg-black/85 border-2 border-terminal-green h-[calc(100vh-60px)] w-screen p-5 overflow-y-auto relative backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,65,0.3),inset_0_0_20px_rgba(0,255,65,0.1)]"
+      class="terminal bg-black/85 border-2 border-terminal-green h-[calc(100vh-100px)] w-screen p-5 pb-0 overflow-y-auto overflow-x-hidden relative backdrop-blur-sm shadow-[0_0_20px_rgba(0,255,65,0.3),inset_0_0_20px_rgba(0,255,65,0.1)]"
     >
       <div class="text-center border-b border-terminal-green pb-3 mb-5">
-        <div class="text-xl mb-1">CAUM INDUSTRIES UNIFIED OPERATING SYSTEM</div>
+        <div class="text-xl mb-1">
+          KODAMA1 INDUSTRIES UNIFIED OPERATING SYSTEM
+        </div>
         <div class="text-sm text-terminal-dark-green">
-          Copyright 2025-∞ CAUM INDUSTRIES
+          Copyright 2025-∞ KODAMA1 INDUSTRIES
         </div>
         <div class="text-sm text-terminal-dark-green">
           Server 01 - Portfolio Module
@@ -481,14 +814,17 @@
       >
         <pre>
    ╔══════════════════════════════════════╗
-   ║     MARCUS CAUM TERMINAL v2.5.1     ║
+   ║     MARCUS KODAMA1 TERMINAL v2.5.1   ║
    ║     Senior Software Engineer         ║
    ╚══════════════════════════════════════╝
             </pre
         >
       </div>
 
-      <div class="my-5 border-l-2 border-terminal-green pl-4">
+      <div
+        id="boot-sequence-container"
+        class="my-5 border-l-2 border-terminal-green pl-4"
+      >
         <div class="text-terminal-green text-lg mb-3 underline">
           SYSTEM BOOT SEQUENCE
         </div>
@@ -501,311 +837,392 @@
         </div>
         <div id="boot-sequence"></div>
       </div>
-
-      <div
-        class="my-5 border-l-2 border-terminal-green pl-4 hidden"
-        id="main-menu"
-      >
-        <div class="text-terminal-green text-lg mb-3 underline">
-          MAIN MENU - SELECT OPTION
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showSection('profile')"
-        >
-          ► [1] PERSONNEL FILE
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showSection('skills')"
-        >
-          ► [2] TECHNICAL SPECIFICATIONS
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showSection('experience')"
-        >
-          ► [3] MISSION HISTORY
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showSection('projects')"
-        >
-          ► [4] PROJECT DATABASE
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showSection('contact')"
-        >
-          ► [5] COMMUNICATION PROTOCOLS
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="downloadResume()"
-        >
-          ► [6] DOWNLOAD PERSONNEL DOSSIER
-        </div>
-        <div
-          class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
-          onclick="showMatrix()"
-        >
-          ► [7] ENTER THE MATRIX
-        </div>
-      </div>
-
-      <div class="section" id="profile-section" style="display: none">
-        <div class="section-title">PERSONNEL FILE - MARCUS_CAUM.DAT</div>
-        <div class="info-line">
-          ► Name: <span class="highlight">Marcus Caum</span>
-        </div>
-        <div class="info-line">
-          ► Designation: <span class="highlight">Senior Software Engineer</span>
-        </div>
-        <div class="info-line">
-          ► Location:
-          <span class="highlight">Francisco Beltrão, PR, Brazil</span>
-        </div>
-        <div class="info-line">
-          ► Experience: <span class="highlight">10+ Years</span>
-        </div>
-        <div class="info-line">
-          ► Status:
-          <span class="highlight">ACTIVE - Available for Remote Missions</span>
-        </div>
-        <br />
-        <div class="info-line">PROFILE SUMMARY:</div>
-        <div class="info-line">
-          Results-driven Senior Software Engineer with extensive
-        </div>
-        <div class="info-line">
-          experience in <span class="highlight">Next.js 15</span>, React,
-          TypeScript, and DevOps.
-        </div>
-        <div class="info-line">
-          Specialized in <span class="highlight">Docker containerization</span>,
-          PostgreSQL,
-        </div>
-        <div class="info-line">
-          Supabase, and modern web technologies. Expert in
-        </div>
-        <div class="info-line">system architecture and team leadership.</div>
-        <br />
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] RETURN TO MAIN MENU
-        </div>
-      </div>
-
-      <div class="section" id="skills-section" style="display: none">
-        <div class="section-title">TECHNICAL SPECIFICATIONS</div>
-        <div class="skill-grid">
-          <div class="skill-category">
-            <h4>FRONTEND_SYSTEMS.EXE</h4>
-            <div class="info-line">• Next.js 15</div>
-            <div class="info-line">• React & TypeScript</div>
-            <div class="info-line">• Tailwind CSS</div>
-            <div class="info-line">• Jotai & Recoil</div>
-          </div>
-          <div class="skill-category">
-            <h4>BACKEND_CORE.SYS</h4>
-            <div class="info-line">• Node.js</div>
-            <div class="info-line">• PostgreSQL</div>
-            <div class="info-line">• Supabase</div>
-            <div class="info-line">• GraphQL & REST</div>
-          </div>
-          <div class="skill-category">
-            <h4>DEVOPS_MODULE.BIN</h4>
-            <div class="info-line">• Docker</div>
-            <div class="info-line">• Portainer</div>
-            <div class="info-line">• CI/CD Pipelines</div>
-            <div class="info-line">• E2E Testing</div>
-          </div>
-          <div class="skill-category">
-            <h4>SPECIALIZED_TECH.DAT</h4>
-            <div class="info-line">• MapBox API</div>
-            <div class="info-line">• Data Visualization</div>
-            <div class="info-line">• Performance Optimization</div>
-            <div class="info-line">• Team Leadership</div>
-          </div>
-        </div>
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] RETURN TO MAIN MENU
-        </div>
-      </div>
-
-      <div class="section" id="experience-section" style="display: none">
-        <div class="section-title">MISSION HISTORY - CLASSIFIED</div>
-
-        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
-          <div class="info-line">
-            <span class="highlight">CURRENT MISSION:</span> TruckMap Industries
-          </div>
-          <div class="info-line">Duration: 11/2021 - Present (Active)</div>
-          <div class="info-line">Location: Remote - Chicago, IL</div>
-          <div class="info-line">Objectives Completed:</div>
-          <div class="info-line">
-            • Architected scalable applications using
-            <span class="highlight">Next.js 15</span> with TypeScript
-          </div>
-          <div class="info-line">
-            • <span class="highlight">Migrated Recoil → Jotai</span> improving
-            bundle size and performance
-          </div>
-          <div class="info-line">
-            • Developed sophisticated route system using
-            <span class="highlight">Mapbox API</span> and Turf.js
-          </div>
-          <div class="info-line">
-            • Built responsive dashboards with
-            <span class="highlight">Tailwind CSS</span> for shipment management
-          </div>
-          <div class="info-line">
-            • Implemented advanced clustering system for location points
-            optimization
-          </div>
-          <div class="info-line">
-            • Integrated viewport-based location loading with efficient data
-            caching
-          </div>
-          <div class="info-line">
-            • Developed roads restriction visibility based on truck settings
-          </div>
-          <div class="info-line">
-            • Led technical hiring process, validating senior developers' skills
-          </div>
-          <div class="info-line">
-            • Configured comprehensive
-            <span class="highlight">CI/CD pipelines</span> and E2E testing
-            infrastructure
-          </div>
-        </div>
-
-        <div style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0">
-          <div class="info-line">
-            <span class="highlight">PREVIOUS MISSION:</span> Irwin Corporation
-          </div>
-          <div class="info-line">Duration: 03/2020 - 11/2021</div>
-          <div class="info-line">Location: Remote - Toronto, Canada</div>
-          <div class="info-line">Objectives Completed:</div>
-          <div class="info-line">
-            • Built high-performance tables (10K+ rows)
-          </div>
-          <div class="info-line">• React Query optimization implementation</div>
-          <div class="info-line">• React Native app development</div>
-        </div>
-
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] RETURN TO MAIN MENU
-        </div>
-      </div>
-
-      <div class="section" id="projects-section" style="display: none">
-        <div class="section-title">PROJECT DATABASE</div>
-
-        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
-          <div class="info-line">
-            <span class="highlight">PROJECT_ALPHA:</span> TruckMap Route System
-          </div>
-          <div class="info-line">Status: OPERATIONAL</div>
-          <div class="info-line">
-            Tech Stack: Next.js 15, MapBox, Jotai, PostgreSQL
-          </div>
-          <div class="info-line">
-            Features: Real-time routing, clustering, restrictions
-          </div>
-        </div>
-
-        <div style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0">
-          <div class="info-line">
-            <span class="highlight">PROJECT_BETA:</span> High-Performance Data
-            Tables
-          </div>
-          <div class="info-line">Status: COMPLETED</div>
-          <div class="info-line">
-            Tech Stack: React, TypeScript, Virtualization
-          </div>
-          <div class="info-line">
-            Features: 10K+ rows, React Query, Filtering
-          </div>
-        </div>
-
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] RETURN TO MAIN MENU
-        </div>
-      </div>
-
-      <div class="section" id="contact-section" style="display: none">
-        <div class="section-title">COMMUNICATION PROTOCOLS</div>
-        <div class="info-line">
-          ► Email: <span class="highlight">marcuslucas.jb@gmail.com</span>
-        </div>
-        <div class="info-line">
-          ► LinkedIn: <span class="highlight">linkedin.com/in/marcuscaum</span>
-        </div>
-        <div class="info-line">
-          ► GitHub: <span class="highlight">github.com/marcuscaum</span>
-        </div>
-        <div class="info-line">
-          ► Phone: <span class="highlight">+55 46 99935 1423</span>
-        </div>
-        <br />
-        <div class="info-line">SECURE CHANNELS AVAILABLE:</div>
-        <div
-          class="menu-option"
-          onclick="window.open('mailto:marcuslucas.jb@gmail.com')"
-        >
-          ► [1] SEND ENCRYPTED MESSAGE
-        </div>
-        <div
-          class="menu-option"
-          onclick="window.open('https://linkedin.com/in/marcuscaum', '_blank')"
-        >
-          ► [2] CONNECT VIA LINKEDIN
-        </div>
-        <div
-          class="menu-option"
-          onclick="window.open('https://github.com/marcuscaum', '_blank')"
-        >
-          ► [3] ACCESS CODE REPOSITORY
-        </div>
-        <br />
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] RETURN TO MAIN MENU
-        </div>
-      </div>
-
-      <div class="section" id="matrix-section" style="display: none">
-        <div class="section-title glitch">ENTERING THE MATRIX...</div>
-        <div class="ascii-art">
-          <pre id="matrix-rain"></pre>
-        </div>
-        <div class="menu-option" onclick="showMainMenu()">
-          ► [ESC] EXIT MATRIX
-        </div>
-      </div>
-
-      <div
-        class="my-5 border-l-2 border-terminal-green pl-4"
-        id="command-section"
-      >
-        <div class="text-terminal-green text-lg mb-3 underline">
-          COMMAND LINE INTERFACE
-        </div>
-        <div id="command-output" class="mb-3"></div>
-        <div class="relative flex items-center">
-          <span class="text-terminal-green mr-2">marcus@portfolio:~$</span>
-          <input
-            type="text"
-            class="command-input bg-transparent border-0 text-terminal-green font-mono outline-0 flex-1 min-w-0"
-            id="command-input"
-            placeholder="type 'help' for commands"
-            onkeypress="handleCommand(event)"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <span
-            class="cursor bg-terminal-green animate-pulse inline-block w-2 h-4 ml-1"
-            >&nbsp;</span
+      <div id="main-container" class="hidden h-[calc(100vh-320px)]">
+        <div class="w-1/2 h-full overflow-y-auto overflow-x-hidden pr-2">
+          <div
+            class="my-5 border-l-2 border-terminal-green pl-4 hidden"
+            id="main-menu"
           >
+            <div class="text-terminal-green text-lg mb-3 underline">
+              MAIN MENU - SELECT OPTION
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showSection('profile')"
+            >
+              ► [1] PERSONNEL FILE
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showSection('skills')"
+            >
+              ► [2] TECHNICAL SPECIFICATIONS
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showSection('experience')"
+            >
+              ► [3] MISSION HISTORY
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showSection('projects')"
+            >
+              ► [4] PROJECT DATABASE
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showSection('contact')"
+            >
+              ► [5] COMMUNICATION PROTOCOLS
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="downloadResume()"
+            >
+              ► [6] DOWNLOAD PERSONNEL DOSSIER
+            </div>
+            <div
+              class="cursor-pointer py-1 px-2 my-1 transition-all duration-300 hover:bg-terminal-green/20 hover:translate-x-3"
+              onclick="showMatrix()"
+            >
+              ► [7] ENTER THE MATRIX
+            </div>
+          </div>
+
+          <div class="section" id="profile-section" style="display: none">
+            <div class="section-title">PERSONNEL FILE - MARCUS_CAUM.DAT</div>
+            <div class="info-line">
+              ► Name: <span class="highlight">Marcus Caum</span>
+            </div>
+            <div class="info-line">
+              ► Designation:
+              <span class="highlight">Senior Software Engineer</span>
+            </div>
+            <div class="info-line">
+              ► Location:
+              <span class="highlight">Francisco Beltrão, PR, Brazil</span>
+            </div>
+            <div class="info-line">
+              ► Experience: <span class="highlight">10+ Years</span>
+            </div>
+            <div class="info-line">
+              ► Status:
+              <span class="highlight"
+                >ACTIVE - Available for Remote Missions</span
+              >
+            </div>
+            <br />
+            <div class="info-line">PROFILE SUMMARY:</div>
+            <div class="info-line">
+              Results-driven Senior Software Engineer with extensive
+            </div>
+            <div class="info-line">
+              experience in <span class="highlight">Next.js 15</span>, React,
+              TypeScript, and DevOps.
+            </div>
+            <div class="info-line">
+              Specialized in
+              <span class="highlight">Docker containerization</span>,
+              PostgreSQL,
+            </div>
+            <div class="info-line">
+              Supabase, and modern web technologies. Expert in
+            </div>
+            <div class="info-line">
+              system architecture and team leadership.
+            </div>
+            <br />
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] RETURN TO MAIN MENU
+            </div>
+          </div>
+
+          <div class="section" id="skills-section" style="display: none">
+            <div class="section-title">TECHNICAL SPECIFICATIONS</div>
+            <div class="skill-grid">
+              <div class="skill-category">
+                <h4>FRONTEND_SYSTEMS.EXE</h4>
+                <div class="info-line">• Next.js 15</div>
+                <div class="info-line">• React & TypeScript</div>
+                <div class="info-line">• Tailwind CSS</div>
+                <div class="info-line">• Jotai & Recoil</div>
+              </div>
+              <div class="skill-category">
+                <h4>BACKEND_CORE.SYS</h4>
+                <div class="info-line">• Node.js</div>
+                <div class="info-line">• PostgreSQL</div>
+                <div class="info-line">• Supabase</div>
+                <div class="info-line">• GraphQL & REST</div>
+              </div>
+              <div class="skill-category">
+                <h4>DEVOPS_MODULE.BIN</h4>
+                <div class="info-line">• Docker</div>
+                <div class="info-line">• Portainer</div>
+                <div class="info-line">• CI/CD Pipelines</div>
+                <div class="info-line">• E2E Testing</div>
+              </div>
+              <div class="skill-category">
+                <h4>SPECIALIZED_TECH.DAT</h4>
+                <div class="info-line">• MapBox API</div>
+                <div class="info-line">• Data Visualization</div>
+                <div class="info-line">• Performance Optimization</div>
+                <div class="info-line">• Team Leadership</div>
+              </div>
+            </div>
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] RETURN TO MAIN MENU
+            </div>
+          </div>
+
+          <div class="section" id="experience-section" style="display: none">
+            <div class="section-title">MISSION HISTORY - CLASSIFIED</div>
+
+            <div
+              style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0"
+            >
+              <div class="info-line">
+                <span class="highlight">CURRENT MISSION:</span> TruckMap
+                Industries
+              </div>
+              <div class="info-line">Duration: 11/2021 - Present (Active)</div>
+              <div class="info-line">Location: Remote - Chicago, IL</div>
+              <div class="info-line">Objectives Completed:</div>
+              <div class="info-line">
+                • Architected scalable applications using
+                <span class="highlight">Next.js 15</span> with TypeScript
+              </div>
+              <div class="info-line">
+                •
+                <span class="highlight">Migrated Recoil → Jotai</span> improving
+                bundle size and performance
+              </div>
+              <div class="info-line">
+                • Developed sophisticated route system using
+                <span class="highlight">Mapbox API</span> and Turf.js
+              </div>
+              <div class="info-line">
+                • Built responsive dashboards with
+                <span class="highlight">Tailwind CSS</span> for shipment
+                management
+              </div>
+              <div class="info-line">
+                • Implemented advanced clustering system for location points
+                optimization
+              </div>
+              <div class="info-line">
+                • Integrated viewport-based location loading with efficient data
+                caching
+              </div>
+              <div class="info-line">
+                • Developed roads restriction visibility based on truck settings
+              </div>
+              <div class="info-line">
+                • Led technical hiring process, validating senior developers'
+                skills
+              </div>
+              <div class="info-line">
+                • Configured comprehensive
+                <span class="highlight">CI/CD pipelines</span> and E2E testing
+                infrastructure
+              </div>
+            </div>
+
+            <div
+              style="border: 1px solid #00cc33; padding: 10px; margin: 10px 0"
+            >
+              <div class="info-line">
+                <span class="highlight">PREVIOUS MISSION:</span> Irwin
+                Corporation
+              </div>
+              <div class="info-line">Duration: 03/2020 - 11/2021</div>
+              <div class="info-line">Location: Remote - Toronto, Canada</div>
+              <div class="info-line">Objectives Completed:</div>
+              <div class="info-line">
+                • Built high-performance tables (10K+ rows)
+              </div>
+              <div class="info-line">
+                • React Query optimization implementation
+              </div>
+              <div class="info-line">• React Native app development</div>
+            </div>
+
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] RETURN TO MAIN MENU
+            </div>
+          </div>
+
+          <div class="section" id="projects-section" style="display: none">
+            <div class="section-title">PROJECT DATABASE</div>
+
+            <div
+              style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0"
+            >
+              <div class="info-line">
+                <span class="highlight">PROJECT_ALPHA:</span> TruckMap Route
+                System
+              </div>
+              <div class="info-line">Status: OPERATIONAL</div>
+              <div class="info-line">
+                Tech Stack: Next.js 15, MapBox, Jotai, PostgreSQL
+              </div>
+              <div class="info-line">
+                Features: Real-time routing, clustering, restrictions
+              </div>
+            </div>
+
+            <div
+              style="border: 1px solid #ffff00; padding: 10px; margin: 10px 0"
+            >
+              <div class="info-line">
+                <span class="highlight">PROJECT_BETA:</span> High-Performance
+                Data Tables
+              </div>
+              <div class="info-line">Status: COMPLETED</div>
+              <div class="info-line">
+                Tech Stack: React, TypeScript, Virtualization
+              </div>
+              <div class="info-line">
+                Features: 10K+ rows, React Query, Filtering
+              </div>
+            </div>
+
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] RETURN TO MAIN MENU
+            </div>
+          </div>
+
+          <div class="section" id="contact-section" style="display: none">
+            <div class="section-title">COMMUNICATION PROTOCOLS</div>
+            <div class="info-line">
+              ► Email: <span class="highlight">marcuslucas.jb@gmail.com</span>
+            </div>
+            <div class="info-line">
+              ► LinkedIn:
+              <span class="highlight">linkedin.com/in/marcuscaum</span>
+            </div>
+            <div class="info-line">
+              ► GitHub: <span class="highlight">github.com/marcuscaum</span>
+            </div>
+            <div class="info-line">
+              ► Phone: <span class="highlight">+55 46 99935 1423</span>
+            </div>
+            <br />
+            <div class="info-line">SECURE CHANNELS AVAILABLE:</div>
+            <div
+              class="menu-option"
+              onclick="window.open('mailto:marcuslucas.jb@gmail.com')"
+            >
+              ► [1] SEND ENCRYPTED MESSAGE
+            </div>
+            <div
+              class="menu-option"
+              onclick="window.open('https://linkedin.com/in/marcuscaum', '_blank')"
+            >
+              ► [2] CONNECT VIA LINKEDIN
+            </div>
+            <div
+              class="menu-option"
+              onclick="window.open('https://github.com/marcuscaum', '_blank')"
+            >
+              ► [3] ACCESS CODE REPOSITORY
+            </div>
+            <br />
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] RETURN TO MAIN MENU
+            </div>
+          </div>
+
+          <div class="section" id="matrix-section" style="display: none">
+            <div class="section-title glitch">ENTERING THE MATRIX...</div>
+            <div class="ascii-art">
+              <pre id="matrix-rain"></pre>
+            </div>
+            <div class="menu-option" onclick="showMainMenu()">
+              ► [ESC] EXIT MATRIX
+            </div>
+          </div>
+        </div>
+        <div
+          class="w-1/2 h-full overflow-y-auto overflow-x-hidden pl-2 border-l border-terminal-green"
+        >
+          <div
+            class="border-l-2 border-terminal-green pl-4 hidden h-full"
+            id="command-section"
+          >
+            <div class="text-terminal-green text-lg mb-3 underline">
+              COMMAND LINE INTERFACE
+            </div>
+            <div id="command-output" class="mb-3"></div>
+            <div class="relative flex items-center">
+              <span class="text-terminal-green mr-2">marcus@portfolio:~$</span>
+              <input
+                type="text"
+                class="command-input bg-transparent border-0 text-terminal-green font-mono outline-0 flex-1 min-w-0"
+                id="command-input"
+                placeholder="type 'help' for commands"
+                onkeypress="handleCommand(event)"
+                autocomplete="off"
+                spellcheck="false"
+              />
+              <span
+                class="cursor bg-terminal-green animate-pulse inline-block w-2 h-4 ml-1"
+                >&nbsp;</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Radio Controller - Bottom Bar (above status bar) -->
+    <div id="radio-controller" class="radio-controller">
+      <div class="radio-left-section">
+        <div class="radio-title">[RADIO] KODAMA1 AUDIO STREAM</div>
+        <div class="track-info" id="current-track">► Ready to play...</div>
+      </div>
+
+      <div class="radio-right-section">
+        <div class="radio-controls">
+          <button
+            class="radio-btn"
+            onclick="prevTrack()"
+            title="Previous Track"
+          >
+            |&lt;&lt;
+          </button>
+          <button
+            class="radio-btn"
+            id="play-pause-btn"
+            onclick="togglePlayPause()"
+            title="Play/Pause"
+          >
+            |&gt;
+          </button>
+          <button class="radio-btn" onclick="nextTrack()" title="Next Track">
+            &gt;&gt;|
+          </button>
+          <button
+            class="radio-btn"
+            onclick="shufflePlaylist()"
+            title="Shuffle Playlist"
+          >
+            [RND]
+          </button>
+        </div>
+
+        <div class="volume-control">
+          <span class="text-terminal-green">[VOL]</span>
+          <input
+            type="range"
+            class="volume-slider"
+            id="volume-slider"
+            min="0"
+            max="100"
+            value="50"
+            onchange="setVolume(this.value)"
+          />
+          <span class="volume-display" id="volume-display">50%</span>
         </div>
       </div>
     </div>
@@ -822,6 +1239,162 @@
     <script>
       let currentSection = "boot";
       let bootIndex = 0;
+
+      // Radio System for Background Music
+      class RadioSystem {
+        constructor() {
+          this.playlist = [
+            "sounds/radio/Allan Gray - Swing Doors.mp3",
+            "sounds/radio/Billie Holiday - Crazy He Calls Me.mp3",
+            "sounds/radio/Billie Holiday- Easy Living.mp3",
+            "sounds/radio/Billy Munn - Jazzy Interlude.mp3",
+            "sounds/radio/Bob Crosby and The Bobcats - Happy Times.mp3",
+            "sounds/radio/Bob Crosby and The Bobcats - Way Back Home.mp3",
+            "sounds/radio/Cole Porter - Anything Goes.mp3",
+            "sounds/radio/Danny Kaye and The Andrews Sisters - Civilization.mp3",
+            "sounds/radio/Eddy Christiani and Frans Poptie - Rythm For You.mp3",
+            "sounds/radio/Gerhard Trede - Fox Boogie.mp3",
+            "sounds/radio/Gerhard Trede - Jolly Days.mp3",
+            "sounds/radio/Jack Shaindlin - I'm Tickled Pink.mp3",
+            "sounds/radio/Jack Shaindlin - Let's Go Sunning.mp3",
+          ];
+
+          this.currentTrackIndex = 0;
+          this.isPlaying = false;
+          this.isShuffled = false;
+          this.audio = new Audio();
+          this.volume = 0.5;
+
+          this.setupAudioEvents();
+          this.loadCurrentTrack();
+        }
+
+        setupAudioEvents() {
+          this.audio.addEventListener("ended", () => {
+            this.nextTrack();
+          });
+
+          this.audio.addEventListener("loadstart", () => {
+            this.updateTrackInfo("Loading...");
+          });
+
+          this.audio.addEventListener("canplay", () => {
+            this.updateTrackInfo();
+          });
+
+          this.audio.addEventListener("error", (e) => {
+            console.log("Radio audio error:", e);
+            this.updateTrackInfo("Error loading track");
+            setTimeout(() => this.nextTrack(), 2000);
+          });
+        }
+
+        loadCurrentTrack() {
+          const track = this.playlist[this.currentTrackIndex];
+          this.audio.src = track;
+          this.audio.volume = this.volume;
+          this.updateTrackInfo();
+        }
+
+        updateTrackInfo(customText = null) {
+          const trackElement = document.getElementById("current-track");
+          if (customText) {
+            trackElement.textContent = customText;
+            return;
+          }
+
+          const track = this.playlist[this.currentTrackIndex];
+          const filename = track.split("/").pop().replace(".mp3", "");
+
+          if (this.isPlaying) {
+            trackElement.textContent = `► NOW STREAMING: ${filename}`;
+          } else {
+            trackElement.textContent = `► LOADED: ${filename}`;
+          }
+        }
+
+        play() {
+          if (this.audio.src) {
+            this.audio
+              .play()
+              .then(() => {
+                this.isPlaying = true;
+                this.updatePlayButton();
+                this.updateTrackInfo();
+                terminalAudio.playSound("menuSelect");
+              })
+              .catch((e) => {
+                console.log("Radio play error:", e);
+                this.updateTrackInfo("Playback error");
+              });
+          }
+        }
+
+        pause() {
+          this.audio.pause();
+          this.isPlaying = false;
+          this.updatePlayButton();
+          this.updateTrackInfo();
+        }
+
+        togglePlayPause() {
+          if (this.isPlaying) {
+            this.pause();
+          } else {
+            this.play();
+          }
+        }
+
+        nextTrack() {
+          this.currentTrackIndex =
+            (this.currentTrackIndex + 1) % this.playlist.length;
+          this.loadCurrentTrack();
+          if (this.isPlaying) {
+            this.play();
+          }
+        }
+
+        prevTrack() {
+          this.currentTrackIndex =
+            this.currentTrackIndex === 0
+              ? this.playlist.length - 1
+              : this.currentTrackIndex - 1;
+          this.loadCurrentTrack();
+          if (this.isPlaying) {
+            this.play();
+          }
+        }
+
+        shufflePlaylist() {
+          // Fisher-Yates shuffle algorithm
+          const shuffled = [...this.playlist];
+          for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+          }
+
+          this.playlist = shuffled;
+          this.currentTrackIndex = 0;
+          this.loadCurrentTrack();
+          this.isShuffled = !this.isShuffled;
+
+          terminalAudio.playSound("menuSelect");
+          this.updateTrackInfo("► Playlist randomized!");
+          setTimeout(() => this.updateTrackInfo(), 2000);
+        }
+
+        setVolume(volume) {
+          this.volume = volume / 100;
+          this.audio.volume = this.volume;
+          document.getElementById("volume-display").textContent = `${volume}%`;
+        }
+
+        updatePlayButton() {
+          const btn = document.getElementById("play-pause-btn");
+          btn.textContent = this.isPlaying ? "||" : "|>";
+          btn.className = this.isPlaying ? "radio-btn active" : "radio-btn";
+        }
+      }
 
       // Audio System with Real Terminal Sounds
       class TerminalAudio {
@@ -879,29 +1452,13 @@
             this.sounds.scroll.volume = 0.2;
 
             // Start background ambience
-            this.startBackgroundAmbience();
           } catch (error) {
             console.log("Audio loading failed:", error);
           }
         }
 
         // Background ambience
-        startBackgroundAmbience() {
-          if (!this.isEnabled || !this.sounds.scrollLoop) return;
-
-          // Play subtle scrolling loop in background
-          const playAmbience = () => {
-            if (this.isEnabled && Math.random() < 0.4) {
-              // 40% chance
-              this.playSound("scroll");
-            }
-          };
-
-          this.backgroundLoop = setInterval(
-            playAmbience,
-            3000 + Math.random() * 4000
-          );
-        }
+        startBackgroundAmbience() {}
 
         // Generic sound player with random variation
         playSound(soundKey, volume = null) {
@@ -1024,14 +1581,33 @@
       // Initialize audio system
       const terminalAudio = new TerminalAudio();
 
+      // Initialize radio system
+      const radioSystem = new RadioSystem();
+
+      // Radio control functions
+      function togglePlayPause() {
+        radioSystem.togglePlayPause();
+      }
+
+      function nextTrack() {
+        radioSystem.nextTrack();
+      }
+
+      function prevTrack() {
+        radioSystem.prevTrack();
+      }
+
+      function shufflePlaylist() {
+        radioSystem.shufflePlaylist();
+      }
+
+      function setVolume(volume) {
+        radioSystem.setVolume(volume);
+      }
+
       const bootMessages = [
-        "INITIALIZING NEURAL NETWORK...",
-        "LOADING PERSONAL DATABASE...",
-        "SCANNING FOR AVAILABLE PROJECTS...",
+        "LOADING PERSONAL DATABASE AND SKILL MODULES...",
         "CONNECTING TO GITHUB REPOSITORY...",
-        "VERIFYING SECURITY CLEARANCE...",
-        "LOADING SKILL MODULES...",
-        "ESTABLISHING COMMUNICATION PROTOCOLS...",
         "SYSTEM READY - WELCOME TO THE MARCUS CAUM INTERFACE",
       ];
 
@@ -1073,10 +1649,16 @@
         } else {
           setTimeout(() => {
             document.querySelector(".section").style.display = "none";
+            document.getElementById("boot-sequence-container").style.display =
+              "none";
             document.getElementById("main-menu").style.display = "block";
+            document.getElementById("command-section").style.display = "block";
+            document.getElementById("main-container").style.display = "flex";
             currentSection = "main";
 
             // Scroll to show main menu
+            terminalAudio.playBootSound();
+            radioSystem.play();
             setTimeout(smoothScrollToBottom, 300);
           }, 1000);
         }
@@ -1101,6 +1683,7 @@
         document.getElementById(section + "-section").style.display = "block";
         currentSection = section;
 
+        terminalAudio.playMenuSelect();
         if (section === "matrix") {
           startMatrix();
         }
@@ -1125,6 +1708,17 @@
       function handleCommand(event) {
         terminalAudio.playKeyPress();
 
+        // Auto-scroll to command section when typing
+        if (event.key !== "Enter") {
+          setTimeout(() => {
+            const commandSection = document.getElementById("command-section");
+            commandSection.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
+            });
+          }, 50);
+        }
+
         if (event.key === "Enter") {
           const input = document.getElementById("command-input");
           const output = document.getElementById("command-output");
@@ -1145,7 +1739,15 @@
   • download - Download resume
   • clear - Clear terminal
   • matrix - Enter the matrix
-  • whoami - Current user info`;
+  • whoami - Current user info
+  
+► Audio Stream commands:
+  • radio play - Start audio stream
+  • radio pause - Pause audio stream
+  • radio next - Next track
+  • radio prev - Previous track
+  • radio shuffle - Randomize playlist
+  • radio volume [0-100] - Set volume level`;
               break;
             case "about":
               showSectionWithScroll("profile");
@@ -1184,8 +1786,44 @@
               response =
                 "► Current user: VISITOR\n► Access level: PUBLIC\n► Location: WEB_INTERFACE";
               break;
+
+            // Radio commands
+            case "radio":
+            case "radio play":
+              radioSystem.play();
+              response = "► Radio playback started";
+              break;
+            case "radio pause":
+              radioSystem.pause();
+              response = "► Radio playback paused";
+              break;
+            case "radio next":
+              radioSystem.nextTrack();
+              response = "► Switched to next track";
+              break;
+            case "radio prev":
+              radioSystem.prevTrack();
+              response = "► Switched to previous track";
+              break;
+            case "radio shuffle":
+              radioSystem.shufflePlaylist();
+              response = "► Playlist shuffled";
+              break;
             default:
-              response = `► Command '${command}' not recognized. Type 'help' for available commands.`;
+              // Check for radio volume command
+              if (command.startsWith("radio volume ")) {
+                const volumeValue = command.split(" ")[2];
+                const volume = parseInt(volumeValue);
+                if (volume >= 0 && volume <= 100) {
+                  radioSystem.setVolume(volume);
+                  document.getElementById("volume-slider").value = volume;
+                  response = `► Radio volume set to ${volume}%`;
+                } else {
+                  response = "► Invalid volume. Use: radio volume [0-100]";
+                }
+              } else {
+                response = `► Command '${command}' not recognized. Type 'help' for available commands.`;
+              }
           }
 
           const commandLine = document.createElement("div");
@@ -1199,20 +1837,94 @@
 
           input.value = "";
 
-          // Auto-scroll to show new content
-          output.scrollTop = output.scrollHeight;
-
-          // Also ensure the terminal scrolls to show the output
+          // Auto-scroll to show new content in command output
           setTimeout(() => {
-            const terminal = document.querySelector(".terminal");
-            terminal.scrollTop = terminal.scrollHeight;
+            output.scrollTop = output.scrollHeight;
+
+            // Ensure the command section is visible after command execution
+            const commandSection = document.getElementById("command-section");
+            commandSection.scrollIntoView({ behavior: "smooth", block: "end" });
           }, 100);
         }
       }
 
-      function downloadResume() {
-        // Simple print functionality for now
-        window.print();
+      async function downloadResume() {
+        try {
+          // Fetch the professional resume version from index_backup.html
+          const response = await fetch("./index_backup.html");
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch resume: ${response.status}`);
+          }
+
+          let resumeContent = await response.text();
+
+          // Add print-specific styles to optimize for PDF generation
+          const printStyles = `
+            <style>
+              @media print {
+                body { font-size: 12px; line-height: 1.4; color: #000 !important; }
+                .no-print, [aria-labelledby="cta-heading"] { display: none !important; }
+                .break-inside-avoid { break-inside: avoid; }
+                h1 { font-size: 24px; margin-bottom: 8px; page-break-after: avoid; }
+                h2 { font-size: 18px; margin-top: 16px; margin-bottom: 8px; page-break-after: avoid; }
+                h3 { font-size: 16px; margin-bottom: 4px; page-break-after: avoid; }
+                .container { max-width: none; margin: 0; padding: 15px; }
+                a { color: #000 !important; text-decoration: none !important; }
+                .bg-gradient-to-r, .bg-gradient-to-br { background: #f8f9fa !important; color: #000 !important; }
+                .shadow-md, .rounded-lg { box-shadow: none !important; border-radius: 0 !important; }
+                .text-blue-600, .text-green-600, .text-purple-600, .text-orange-600 { color: #000 !important; }
+                .fade-in, .slide-in, .bounce { animation: none !important; }
+                footer { margin-top: 20px; padding-top: 10px; border-top: 1px solid #ccc; }
+              }
+            </style>
+          `;
+
+          // Insert print styles before closing head tag
+          resumeContent = resumeContent.replace(
+            "</head>",
+            printStyles + "</head>"
+          );
+
+          // Create a new window with the professional resume version
+          const printWindow = window.open("", "_blank");
+          printWindow.document.write(resumeContent);
+          printWindow.document.close();
+
+          // Wait for content to load, then print
+          printWindow.onload = () => {
+            setTimeout(() => {
+              printWindow.focus();
+              printWindow.print();
+
+              // Close window after printing (optional)
+              setTimeout(() => {
+                printWindow.close();
+              }, 1000);
+            }, 500);
+          };
+
+          // Play audio feedback
+          terminalAudio.playMenuSelect();
+        } catch (error) {
+          console.error("Error generating resume:", error);
+
+          // Fallback: try to open index_backup.html directly in new tab
+          try {
+            const fallbackWindow = window.open("./index_backup.html", "_blank");
+            if (fallbackWindow) {
+              setTimeout(() => {
+                fallbackWindow.print();
+              }, 1000);
+            }
+          } catch (fallbackError) {
+            alert(
+              "Resume download initiated! Please check your browser's print dialog."
+            );
+          }
+
+          terminalAudio.playError();
+        }
       }
 
       function startMatrix() {
@@ -1264,7 +1976,18 @@
         setInterval(updateTime, 1000);
 
         // Focus on command input
-        document.getElementById("command-input").focus();
+        const commandInput = document.getElementById("command-input");
+        commandInput.focus();
+
+        // Add input event listener to ensure scroll follows typing
+        commandInput.addEventListener("input", function () {
+          setTimeout(ensureCommandVisible, 50);
+        });
+
+        // Also ensure command section is visible when input gains focus
+        commandInput.addEventListener("focus", function () {
+          setTimeout(ensureCommandVisible, 100);
+        });
       });
 
       // Keep focus on command input at all times
@@ -1275,10 +1998,31 @@
         }
       }
 
+      // Ensure command section is always visible when user types
+      function ensureCommandVisible() {
+        const commandSection = document.getElementById("command-section");
+        if (commandSection) {
+          commandSection.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+            inline: "nearest",
+          });
+        }
+      }
+
       // Multiple event listeners to ensure input stays focused
       document.addEventListener("click", function (e) {
-        // Don't focus if clicking on links or buttons that need interaction
-        if (e.target.tagName !== "A" && !e.target.onclick && !e.target.href) {
+        // Don't focus if clicking on interactive elements
+        const isInteractive =
+          e.target.tagName === "A" ||
+          e.target.onclick ||
+          e.target.href ||
+          e.target.classList.contains("menu-option") ||
+          e.target.classList.contains("radio-btn") ||
+          e.target.closest("[onclick]") ||
+          e.target.closest(".menu-option");
+
+        if (!isInteractive) {
           terminalAudio.playMenuSelect();
           setTimeout(maintainFocus, 10);
         }
@@ -1292,9 +2036,12 @@
           e.key !== "Tab" &&
           !e.ctrlKey &&
           !e.altKey &&
-          !e.metaKey
+          !e.metaKey &&
+          e.key.length === 1 // Only for actual typing characters
         ) {
           commandInput.focus();
+          // Ensure command section is visible when user starts typing
+          setTimeout(ensureCommandVisible, 100);
         }
       });
 
@@ -1350,10 +2097,12 @@
       function showSectionWithScroll(sectionName) {
         showSection(sectionName);
         setTimeout(() => {
-          const commandSection = document.getElementById("command-section");
+          const commandSection = document.getElementById(
+            `section-${sectionName}`
+          );
           commandSection.scrollIntoView({
             behavior: "smooth",
-            block: "end",
+            block: "start",
           });
         }, 300);
       }
