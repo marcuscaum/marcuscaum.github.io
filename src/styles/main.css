@@ -3,33 +3,46 @@
 
 /* Custom Terminal Cursor Styles - Green cursor everywhere */
 * {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, auto !important;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>')
+      2 2,
+    auto !important;
 }
 
 /* Green cursor for interactive elements too */
-a, button, select, [onclick] {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, pointer !important;
+a,
+button,
+select,
+[onclick] {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>')
+      2 2,
+    pointer !important;
 }
 
 /* Keep system text cursor for inputs to maintain proper text editing behavior */
-input[type="text"], input[type="email"], input[type="password"], textarea {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
   cursor: text !important;
   caret-color: #00ff41 !important;
   color: #00ff41;
 }
 
 /* Style the text selection in inputs */
-input[type="text"]::selection, 
-input[type="email"]::selection, 
-input[type="password"]::selection, 
+input[type="text"]::selection,
+input[type="email"]::selection,
+input[type="password"]::selection,
 textarea::selection {
   background-color: rgba(0, 255, 65, 0.3);
   color: #00ff41;
 }
 
 /* Green cursor for scrollbars too */
-::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, auto !important;
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>')
+      2 2,
+    auto !important;
 }
 
 /* Additional circuit lines */

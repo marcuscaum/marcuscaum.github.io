@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Function to initialize portfolio core after robot verification
-window.initializePortfolio = function() {
+window.initializePortfolio = function () {
   console.log("🤖 Robot verified! Initializing portfolio core...");
-  
+
   // Initialize the portfolio core system
   portfolioCore.initialize();
 
