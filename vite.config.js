@@ -8,14 +8,11 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     assetsDir: "assets",
     sourcemap: false,
     minify: "terser",
     rollupOptions: {
-      input: {
-        main: "./src/index.html",
-      },
       output: {
         entryFileNames: "assets/[name]-[hash].js",
         chunkFileNames: "assets/[name]-[hash].js",
@@ -23,8 +20,8 @@ export default defineConfig({
       },
     },
   },
-  root: "./",
-  publicDir: "./public",
+  root: "./src",
+  publicDir: "../public",
   base: "./",
   server: {
     port: 3000,

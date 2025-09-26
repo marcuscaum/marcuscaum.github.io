@@ -1,6 +1,37 @@
 /* Marcus Caum's Cyberpunk Terminal Portfolio CSS */
 /* Tailwind CSS is imported via CDN in the HTML */
 
+/* Custom Terminal Cursor Styles - Green cursor everywhere */
+* {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, auto !important;
+}
+
+/* Green cursor for interactive elements too */
+a, button, select, [onclick] {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, pointer !important;
+}
+
+/* Keep system text cursor for inputs to maintain proper text editing behavior */
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  cursor: text !important;
+  caret-color: #00ff41 !important;
+  color: #00ff41;
+}
+
+/* Style the text selection in inputs */
+input[type="text"]::selection, 
+input[type="email"]::selection, 
+input[type="password"]::selection, 
+textarea::selection {
+  background-color: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+/* Green cursor for scrollbars too */
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar-track {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="0,0 0,14 5,11 8,16 11,14 7,10 14,7" fill="%2300ff41" stroke="%23000000" stroke-width="1"/></svg>') 2 2, auto !important;
+}
+
 /* Additional circuit lines */
 body::after {
   content: "";
@@ -458,22 +489,38 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar styling */
-.terminal::-webkit-scrollbar {
-  width: 8px;
+/* Custom Terminal Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-.terminal::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
+  background: #000;
+  border: 1px solid #00ff41;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff41 0%, #00cc33 100%);
+  border: 1px solid #00ff41;
+  border-radius: 0;
+  box-shadow: inset 0 0 6px rgba(0, 255, 65, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00cc33 0%, #009900 100%);
+  box-shadow: inset 0 0 8px rgba(0, 255, 65, 0.5);
+}
+
+::-webkit-scrollbar-corner {
   background: #000;
   border: 1px solid #00ff41;
 }
 
-.terminal::-webkit-scrollbar-thumb {
-  background: #00ff41;
-}
-
-.terminal::-webkit-scrollbar-thumb:hover {
-  background: #00cc33;
+/* Firefox scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00ff41 #000;
 }
 
 /* Radio Controller Styles - Fixed Bottom Bar */

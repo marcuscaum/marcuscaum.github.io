@@ -1,6 +1,7 @@
 export class PortfolioCore {
-  constructor(terminalAudio) {
+  constructor(terminalAudio, radioSystem) {
     this.terminalAudio = terminalAudio;
+    this.radio = radioSystem;
     this.currentSection = "boot";
     this.bootIndex = 0;
     this.bootMessages = [
@@ -165,6 +166,7 @@ export class PortfolioCore {
 
   bootSequence() {
     const bootElement = document.getElementById("boot-sequence");
+    console.log("Boot sequence step:", this.bootIndex);
 
     if (this.bootIndex < this.bootMessages.length) {
       const line = document.createElement("div");
@@ -199,7 +201,11 @@ export class PortfolioCore {
 
         // Scroll to show main menu
         this.terminalAudio.playBootSound();
-        setTimeout(this.smoothScrollToBottom, 300);
+
+        setTimeout(() => {
+          this.smoothScrollToBottom();
+          this.radio.play();
+        }, 300);
       }, 1000);
     }
   }
@@ -224,6 +230,10 @@ export class PortfolioCore {
     this.currentSection = section;
 
     this.terminalAudio.playMenuSelect();
+
+    if (section === "matrix") {
+      this.startMatrix();
+    }
   }
 
   showMainMenu() {
@@ -346,17 +356,58 @@ export class PortfolioCore {
     }
   }
 
-  initialize() {
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => this.bootSequence(), 1000);
-      this.updateTime();
-      setInterval(() => this.updateTime(), 1000);
+  startMatrix() {
+    const matrixElement = document.getElementById("matrix-rain");
+    let matrix = "";
+    const characters =
+      "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
 
-      // Focus on command input
-      const commandInput = document.getElementById("command-input");
-      if (commandInput) {
-        commandInput.focus();
+    for (let i = 0; i < 20; i++) {
+      let line = "";
+      for (let j = 0; j < 50; j++) {
+        line += characters.charAt(
+          Math.floor(Math.random() * characters.length)
+        );
       }
-    });
+      matrix += line + "\n";
+    }
+
+    matrixElement.textContent = matrix;
+
+    // Animate the matrix
+    const matrixInterval = setInterval(() => {
+      if (this.currentSection === "matrix") {
+        matrix = "";
+        for (let i = 0; i < 20; i++) {
+          let line = "";
+          for (let j = 0; j < 50; j++) {
+            line += characters.charAt(
+              Math.floor(Math.random() * characters.length)
+            );
+          }
+          matrix += line + "\n";
+        }
+        matrixElement.textContent = matrix;
+      } else {
+        clearInterval(matrixInterval);
+      }
+    }, 100);
+  }
+
+  initialize() {
+    console.log("PortfolioCore initialized.");
+
+    // Start the boot sequence immediately (DOM is already loaded)
+    setTimeout(() => this.bootSequence(), 1000);
+
+    // Setup time display
+    this.updateTime();
+    setInterval(() => this.updateTime(), 1000);
+
+    // Focus on command input
+    const commandInput = document.getElementById("command-input");
+    if (commandInput) {
+      commandInput.focus();
+    }
   }
 }
