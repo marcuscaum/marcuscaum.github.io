@@ -1,0 +1,52 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "notebook.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.tabSize": 2,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.confirmSync": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.minimap.enabled": false,
+  "playwright.reuseBrowser": true,
+  "playwright.runGlobalSetupOnEachRun": false,
+  "githubPullRequests.pullBranch": "never",
+  "git.ignoreRebaseWarning": true,
+  "playwright.showTrace": false,
+  "git.suggestSmartCommit": false,
+  "git.blame.statusBarItem.enabled": true,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "workbench.colorTheme": "CodeSandbox",
+  "betterTypeScriptErrors.prettify": true,
+  "editor.find.matchCase": true,
+  "editor.fontFamily": "JetBrains Mono, monospace",
+  "editor.fontLigatures": true,
+  "vscode_custom_css.imports": ["file:///C:/Users/User/custom.css"],
+  "editor.fontSize": 12,
+  "editor.lineHeight": 22,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "chat.mcp.autostart": "newAndOutdated",
+  "redhat.telemetry.enabled": true,
+  "editor.rulers": [],
+  "chat.tools.terminal.autoApprove": {
+    "npm run build": true,
+    "npx": true,
+    "Copy-Item": true,
+    "Remove-Item": true,
+    "bun": true,
+    "string,": true,
+    "\",": true,
+    "\"": true,
+    "Set-Content": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "never"
+  },
+  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"]
+}
