@@ -1478,11 +1478,11 @@
 
       // Robot verification function
       function handleRobotResponse(isRobot) {
-        if (isRobot) {
+        if (!isRobot) {
           // Request fullscreen access
           enterFullscreen();
-          
-          // User admits to being a robot - show terminal and initialize portfolio
+
+          // User denies being a robot - show terminal and initialize portfolio
           document.getElementById("robot-check").style.display = "none";
           document.getElementById("main-terminal-content").style.display =
             "block";
@@ -1499,7 +1499,7 @@
             }, 100);
           }
         } else {
-          // User denies being a robot - redirect to backup
+          // User admits to being a robot - redirect to backup
           window.location.href = "../index_backup.html";
         }
       }
